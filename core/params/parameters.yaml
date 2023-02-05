@@ -1,13 +1,13 @@
 # Assuming same resolution in both the directions. Pixel area = pResolution^2
-pResolution: 1
+pResolution: 4
 
 # Actual size of maps is size * pResolution, e.g.,  pWorldMapSize * pResolution
 # For ~1 km^2 actual environment, we have a 1024 grid world with each cell pResolution * pRobotMapSize=1 m^2
-pWorldMapSize: 1024
+pWorldMapSize: 256
 
 # Robot map saves what the robot has seen
 # Could make it sparse if size becomes a problem
-pRobotMapSize: 1024
+pRobotMapSize: 256
 pUnknownImportance: 0.5 # fraction of the largest imaportance of a grid cell
 pRobotMapUseUnknownImportance: false
 
