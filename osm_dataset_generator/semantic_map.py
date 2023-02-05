@@ -122,5 +122,5 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     for i in range(args.num_maps):
-        map,gt_map = generate_semantic_image(args.data_dr + str(i) + '/semantic_data.json')
+        map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json')
         plt.imsave(args.output_dir + str(i) + '.png', map)
