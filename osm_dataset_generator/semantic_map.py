@@ -99,6 +99,7 @@ def generate_semantic_image(file_name:str):
     amenity_map = world_idf_amenity.GetWorldMap() # Generate map, use GenerateMap() for cpu version
 
     map = traffic_map>0 + (1 + leisure_map>0) + (2 + amenity_map>0)
+    map = map/map.max()
 
     #TODO: need to return the corresponding google map
     gmap = None
