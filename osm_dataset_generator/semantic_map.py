@@ -100,10 +100,14 @@ def generate_semantic_image(file_name:str,args:dict,index = None):
     leisure_map = world_idf_leisure.GetWorldMap() # Generate map, use GenerateMap() for cpu version
     amenity_map = world_idf_amenity.GetWorldMap() # Generate map, use GenerateMap() for cpu version
 
-    map = traffic_map>0 + (1 + leisure_map>0) + (2 + amenity_map>0)
-    plot_map(traffic_map,args,title = "traffic_signal",index = index)
-    plot_map(leisure_map,args,title = "leisure",index = index)
-    plot_map(amenity_map,args,title="amenity",index = index)
+    map = np.zeros(leisure_map.shape)
+    map[amenity_map>0] = 3
+    map[leisure_map>0] = 2
+    map[traffic_map>0] = 1
+
+    # plot_map(traffic_map,args,title = "traffic_signal",index = index)
+    # plot_map(leisure_map,args,title = "leisure",index = index)
+    # plot_map(amenity_map,args,title="amenity",index = index)
     #TODO: need to return the corresponding google map
     gmap = None
 
@@ -127,4 +131,10 @@ if __name__ == '__main__':
 
     for i in range(args.num_maps):
         map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json',args,index=i)
-        plt.imsave(args.output_dir + str(i) + '.png', map)
+        cmap = plt.get_cmap('RGB', np.max(map) - np.min(map) + 1)
+        # set limits .5 outside true range
+        mat = plt.matshow(map, cmap=cmap, vmin=np.min(map) - 0.5,
+                          vmax=np.max(map) + 0.5)
+        # tell the colorbar to tick at integers
+        cax = plt.colorbar(mat, ticks=np.arange(np.min(map), np.max(map) + 1))
+        plt.savefig(args.output_dir + str(i) + '.png')
