@@ -14,13 +14,14 @@ colormap = sns.color_palette("light:b", as_cmap=True)
 
 
 def plot_map(map, args, title=None,index = None):
+    plt.figure()
     ax = sns.heatmap(map.transpose(), vmax=1, cmap=colormap, square=True)
     ax.invert_yaxis()
     nrow, ncol = map.shape
     septicks = 10 ** (math.floor(math.log(nrow, 10)) - 1)
     plt.xticks(np.arange(0, nrow, septicks), np.arange(0, nrow, septicks))
     plt.yticks(np.arange(0, ncol, septicks), np.arange(0, ncol, septicks))
-    plt.show()
+    #plt.show()
     plt.savefig(args.output_dir + title + str(index) + '.png')
 
 
