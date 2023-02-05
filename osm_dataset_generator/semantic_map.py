@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
     for i in range(args.num_maps):
         map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json',args,index=i)
-        cmap = plt.get_cmap('RGB', np.max(map) - np.min(map) + 1)
+        cmap = plt.get_cmap('brg', np.max(map) - np.min(map) + 1)
         # set limits .5 outside true range
         mat = plt.matshow(map, cmap=cmap, vmin=np.min(map) - 0.5,
                           vmax=np.max(map) + 0.5)
