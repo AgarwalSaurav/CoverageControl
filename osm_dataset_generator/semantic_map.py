@@ -13,7 +13,7 @@ import seaborn as sns
 colormap = sns.color_palette("light:b", as_cmap=True)
 
 
-def plot_map(map):
+def plot_map(map, args, title=None,index = None):
     ax = sns.heatmap(map.transpose(), vmax=1, cmap=colormap, square=True)
     ax.invert_yaxis()
     nrow, ncol = map.shape
@@ -21,6 +21,7 @@ def plot_map(map):
     plt.xticks(np.arange(0, nrow, septicks), np.arange(0, nrow, septicks))
     plt.yticks(np.arange(0, ncol, septicks), np.arange(0, ncol, septicks))
     plt.show()
+    plt.savefig(args.output_dir + title + str(index) + '.png')
 
 
 ################
@@ -38,7 +39,7 @@ params_ = pyCoverageControl.Parameters('../core/params/parameters.yaml')
 from pyCoverageControl import WorldIDF # for defining world idf
 
 
-def generate_semantic_image(file_name:str):
+def generate_semantic_image(file_name:str,args:dict,index = None):
 
     with open(file_name) as file_:
     # with open("leaflet_geojson_viz/data/semantic_data.json") as file_:
@@ -99,8 +100,9 @@ def generate_semantic_image(file_name:str):
     amenity_map = world_idf_amenity.GetWorldMap() # Generate map, use GenerateMap() for cpu version
 
     map = traffic_map>0 + (1 + leisure_map>0) + (2 + amenity_map>0)
-    map = map/map.max()
-
+    plot_map(traffic_map,args,title = "traffic_signal",index = index)
+    plot_map(leisure_map,args,title = "leisure",index = index)
+    plot_map(amenity_map,args,title="amenity",index = index)
     #TODO: need to return the corresponding google map
     gmap = None
 
@@ -123,5 +125,5 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     for i in range(args.num_maps):
-        map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json')
+        map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json',args,index=i)
         plt.imsave(args.output_dir + str(i) + '.png', map)
