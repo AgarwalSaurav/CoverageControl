@@ -40,6 +40,7 @@ params_ = pyCoverageControl.Parameters('../core/params/parameters.yaml')
 from pyCoverageControl import WorldIDF # for defining world idf
 import smopy
 
+from scipy.ndimage import rotate
 def generate_semantic_image(file_name:str,args:dict,index = None):
 
     with open(file_name) as file_:
@@ -101,21 +102,23 @@ def generate_semantic_image(file_name:str,args:dict,index = None):
     leisure_map = world_idf_leisure.GetWorldMap() # Generate map, use GenerateMap() for cpu version
     amenity_map = world_idf_amenity.GetWorldMap() # Generate map, use GenerateMap() for cpu version
 
-    map = np.zeros(leisure_map.shape)
-    map[amenity_map>0] = 3
-    map[leisure_map>0] = 2
-    map[traffic_map>0] = 1
+    map_ = np.zeros(leisure_map.shape)
+    map_[amenity_map>0] = 3
+    map_[leisure_map>0] = 2
+    map_[traffic_map>0] = 1
 
     # plot_map(traffic_map,args,title = "traffic_signal",index = index)
     # plot_map(leisure_map,args,title = "leisure",index = index)
     # plot_map(amenity_map,args,title="amenity",index = index)
     #TODO: need to return the corresponding google map
     gmap = None
-    gtmap = smopy.Map((semantic_data.bbox[1],semantic_data.bbox[0],semantic-_data.bbox[3],semantic_data.bbox[2]), z=1)
+    gtmap = smopy.Map((semantic_data.bbox[1],semantic_data.bbox[0],semantic_data.bbox[3],semantic_data.bbox[2]), z=20)
     gtmap_np = gtmap.to_numpy()
+    del world_idf_ts
+    del world_idf_leisure
+    del world_idf_amenity
 
-
-    return map,gtmap_np
+    return map_,gtmap_np
 
 def args():
     import argparse
@@ -134,6 +137,7 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     for i in range(args.num_maps):
+        print('LOading {}'.format(i))
         map,gt_map = generate_semantic_image(args.data_dir + '/semantic_data{}.json'.format(str(i)),args,index=i)
         cmap = plt.get_cmap('brg', np.max(map) - np.min(map) + 1)
         # set limits .5 outside true range
@@ -141,12 +145,14 @@ if __name__ == '__main__':
                           vmax=np.max(map) + 0.5)
         # tell the colorbar to tick at integers
         cax = plt.colorbar(mat, ticks=np.arange(np.min(map), np.max(map) + 1))
+
         plt.savefig(args.output_dir + 'sem'+str(i) + '.png')
-
+        plt.close()
         plt.figure()
-        #plt.imshow(gt_map)
+        plt.imshow(gt_map)
         plt.savefig(args.output_dir + 'map'+str(i) + '.png')
-
+        plt.close()
+        
         np.save(args.output_dir + 'sem'+str(i)+'.npy',map)
-
+        
         np.save(args.output_dir + 'gmap' + str(i) + '.npy', map)
