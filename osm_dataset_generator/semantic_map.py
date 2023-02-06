@@ -111,7 +111,7 @@ def generate_semantic_image(file_name:str,args:dict,index = None):
     # plot_map(amenity_map,args,title="amenity",index = index)
     #TODO: need to return the corresponding google map
     gmap = None
-    gtmap = smopy.Map((semantic_data.bbox[1],semantic_data.bbox[0],semantic_data.bbox[3],semantic_data.bbox[2]), z=1)
+    gtmap = smopy.Map((semantic_data.bbox[1],semantic_data.bbox[0],semantic-_data.bbox[3],semantic_data.bbox[2]), z=1)
     gtmap_np = gtmap.to_numpy()
 
 
@@ -134,7 +134,7 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     for i in range(args.num_maps):
-        map,gt_map = generate_semantic_image(args.data_dir + str(i) + '/semantic_data.json',args,index=i)
+        map,gt_map = generate_semantic_image(args.data_dir + '/semantic_data{}.json'.format(str(i)),args,index=i)
         cmap = plt.get_cmap('brg', np.max(map) - np.min(map) + 1)
         # set limits .5 outside true range
         mat = plt.matshow(map, cmap=cmap, vmin=np.min(map) - 0.5,
