@@ -38,7 +38,7 @@ params_ = pyCoverageControl.Parameters('../core/params/parameters.yaml')
 ## WorldIDF ##
 ##############
 from pyCoverageControl import WorldIDF # for defining world idf
-
+import smopy
 
 def generate_semantic_image(file_name:str,args:dict,index = None):
 
@@ -47,11 +47,12 @@ def generate_semantic_image(file_name:str,args:dict,index = None):
         semantic_data = geojson.load(file_)
 
     [origin_lon, origin_lat] = semantic_data.bbox[0:2]
+    print(semantic_data.bbox)
     origin_alt = 0
     geo_transform = GeoTransform(origin_lat, origin_lon, origin_alt)
 
     # BivariateNormalDistribution with peak value of 1
-    traffic_signals_sigma = 20
+    traffic_signals_sigma = 10
     traffic_signals_scale = 2 * math.pi * traffic_signals_sigma * traffic_signals_sigma
 
     # Uniform density polygon
@@ -110,8 +111,11 @@ def generate_semantic_image(file_name:str,args:dict,index = None):
     # plot_map(amenity_map,args,title="amenity",index = index)
     #TODO: need to return the corresponding google map
     gmap = None
+    gtmap = smopy.Map((semantic_data.bbox[1],semantic_data.bbox[0],semantic_data.bbox[3],semantic_data.bbox[2]), z=1)
+    gtmap_np = gtmap.to_numpy()
 
-    return map,gmap
+
+    return map,gtmap_np
 
 def args():
     import argparse
@@ -137,4 +141,8 @@ if __name__ == '__main__':
                           vmax=np.max(map) + 0.5)
         # tell the colorbar to tick at integers
         cax = plt.colorbar(mat, ticks=np.arange(np.min(map), np.max(map) + 1))
-        plt.savefig(args.output_dir + str(i) + '.png')
+        plt.savefig(args.output_dir + 'sem'+str(i) + '.png')
+
+        plt.figure()
+        plt.imshow(gt_map)
+        plt.savefig(args.output_dir + 'map'+str(i) + '.png')
