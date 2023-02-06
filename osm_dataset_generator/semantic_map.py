@@ -144,7 +144,7 @@ if __name__ == '__main__':
         plt.savefig(args.output_dir + 'sem'+str(i) + '.png')
 
         plt.figure()
-        plt.imshow(gt_map)
+        #plt.imshow(gt_map)
         plt.savefig(args.output_dir + 'map'+str(i) + '.png')
 
         np.save(args.output_dir + 'sem'+str(i)+'.npy',map)
