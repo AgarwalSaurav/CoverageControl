@@ -1,7 +1,7 @@
 #ifndef MULTICASTSENDER_H
 #define MULTICASTSENDER_H
+#include <vector>
 
-
-bool sendMulticastMessage(const char* message);
+bool sendMulticastMessage(const std::vector<float>& message);
 
 #endif // MULTICASTSENDER_H

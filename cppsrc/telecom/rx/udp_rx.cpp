@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <net/if.h>
-
+#include <vector>
 #include <arpa/inet.h>
 #include "SharedBuffer.h"
 
@@ -48,21 +48,23 @@ int main() {
     char sharedBuffer[NUM_IPS][BUFFER_SIZE] = {0};
 
     // Receive and handle incoming messages
-    char buffer[BUFFER_SIZE];
+      std::vector<float> buffer(BUFFER_SIZE / sizeof(float));
     sockaddr_in clientAddr{};
     socklen_t clientAddrLen = sizeof(clientAddr);
     ssize_t numBytesReceived;
 
     while (true) {
         // Receive message from a client
-        numBytesReceived = recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0, reinterpret_cast<sockaddr*>(&clientAddr), &clientAddrLen);
+        numBytesReceived = recvfrom(sockfd, buffer.data(), BUFFER_SIZE, 0, reinterpret_cast<sockaddr*>(&clientAddr), &clientAddrLen);
         if (numBytesReceived == -1) {
             std::cerr << "Failed to receive message." << std::endl;
             close(sockfd);
             return 1;
         }
 
-        buffer[numBytesReceived] = '\0';
+        // Convert the received data to a vector of floats
+        size_t numFloatsReceived = numBytesReceived / sizeof(float);
+        std::vector<float> receivedData(buffer.begin(), buffer.begin() + numFloatsReceived);
 
         // Get the IP address as a string
         std::string ipAddress = inet_ntoa(clientAddr.sin_addr);
@@ -70,12 +72,19 @@ int main() {
         // Find the index of the IP address in the range 10.42.0.1 to 10.42.0.20
         int index = std::stoi(ipAddress.substr(ipAddress.find_last_of('.') + 1)) - 1;
 
-        // Store received data in the corresponding row of the shared buffer
-        std::strcpy(sharedBuffer[index], buffer);
+        // Store the received data in the corresponding row of the shared buffer
+        if (receivedData.size() <= BUFFER_SIZE / sizeof(float)) {
+            for (size_t i = 0; i < receivedData.size(); ++i) {
+                sharedBuffer[index][i] = receivedData[i];
+            }
+        }
 
         // Handle the received message (e.g., process data, etc.)
-        std::cout << "Received message from " << ipAddress << ": " << sharedBuffer[index] << std::endl;
-
+        std::cout << "Received message from " << ipAddress << ": ";
+        for (const auto& value : receivedData) {
+            std::cout << value << " ";
+        }
+        std::cout << std::endl;
         }
 
     // Close the socket
