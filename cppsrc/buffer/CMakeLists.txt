@@ -13,6 +13,9 @@ find_package(yaml-cpp REQUIRED)
 find_package(CoverageControlCore REQUIRED)
 find_package(CoverageControlTorch REQUIRED)
 
+include_directories("/usr/local/include/eigen3")
+include_directories("/root/CoverageControl_ws/src/CoverageControl/cppsrc/core/include/CoverageControl/")
+
 add_library(compiler_flags INTERFACE)
 target_compile_features(compiler_flags INTERFACE cxx_std_17)
 
@@ -26,8 +29,10 @@ target_compile_options(compiler_flags INTERFACE
 ####################
 ## Buffer library ##
 ####################
+set(dependencies_list Eigen3::Eigen m stdc++fs yaml-cpp OpenMP::OpenMP_CXX CGAL::CGAL pthread ${GeographicLib_LIBRARIES} boost_iostreams boost_system boost_filesystem)
 
 add_library(buffer_handler buffer_handler.cpp)
 
 add_executable(buffer_test test/buffer_test.cpp)
-target_link_libraries(buffer_test PRIVATE compiler_flags buffer_handler buffer_writer)
+# after private add eigen
+target_link_libraries(buffer_test PRIVATE Eigen3::Eigen compiler_flags buffer_handler)

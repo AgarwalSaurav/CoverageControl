@@ -1,28 +1,40 @@
 #include "buffer_handler.h"
 
-void BufferHandler::TriggerGNN() {
-    rx_lock = true;
-    tx_lock = true;
+namespace CoverageControl {
 
-    // TODO call appropriate functions, maybe some other stuff... 
-    return;
-}
+    void BufferHandler::TriggerGNN() {
+        rx_lock = true;
+        tx_lock = true;
 
-void BufferHandler::ReleaseRXLock() {
-    rx_lock = false;
-}
+        // TODO call appropriate functions, maybe some other stuff... 
+        return;
+    }
 
-void BufferHandler::ReleaseTXLock() {
-    tx_lock = false;
-}
+    void BufferHandler::ReleaseRXLock() {
+        rx_lock = false;
+    }
 
-// TODO sort out type and if and where to use pointer for buf
-void BufferHandler::SetTXBuf(Eigen::MatrixXf buf){}
-void BufferHandler::SetRXBuf(std::vector<Eigen::MatrixXf> buf){}
+    void BufferHandler::ReleaseTXLock() {
+        tx_lock = false;
+    }
 
-Eigen::MatrixXf BufferHandler::GetTXBuf() {
-    return tx_buf;
-}
-std::vector<Eigen::MatrixXf> BufferHandler::GetRXBuf(){
-    return rx_buf;
+    bool BufferHandler::GetTXLock() {
+        return rx_lock;
+    }
+
+    bool BufferHandler::GetRXLock() {
+        return tx_lock;
+    }
+
+    // TODO sort out type and if and where to use pointer for buf
+    void BufferHandler::SetTXBuf(Eigen::MatrixXf buf){}
+    void BufferHandler::SetRXBuf(std::vector<Eigen::MatrixXf> buf){}
+
+/*    Eigen::MatrixXf BufferHandler::GetTXBuf() {
+        return tx_buf;
+    }
+    std::vector<Eigen::MatrixXf> BufferHandler::GetRXBuf(){
+        return rx_buf;
+    }
+    */
 }
