@@ -27,7 +27,14 @@ namespace CoverageControl {
     }
 
     // TODO sort out type and if and where to use pointer for buf
-    void BufferHandler::SetTXBuf(Eigen::MatrixXf buf){}
+    void BufferHandler::SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {
+        tx_buf_ = buf_ptr;
+    }
+
+    std::shared_ptr<Eigen::MatrixXf> BufferHandler::GetTXBuf(){
+        return tx_buf_;
+    }
+
     void BufferHandler::SetRXBuf(std::vector<Eigen::MatrixXf> buf){}
 
 /*    Eigen::MatrixXf BufferHandler::GetTXBuf() {
