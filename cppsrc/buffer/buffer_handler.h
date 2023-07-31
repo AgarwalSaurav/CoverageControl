@@ -25,10 +25,10 @@ class BufferHandler{
         void ReleaseRXLock();
         
         // TODO update return and parameter types etc
-        void SetTXBuf();
-        void SetRXBuf();
-        void GetTxBuf();
-        void GetRxBuf();
+        void SetTXBuf(Eigen::MatrixXf buf);
+        void SetRXBuf(std::vector<Eigen::MatrixXf> buf);
+        Eigen::MatrixXf GetTxBuf();
+        std::vector<Eigen::MatrixXf> GetRxBuf();
         
     private:
         bool tx_lock = false;

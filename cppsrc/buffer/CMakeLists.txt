@@ -28,7 +28,6 @@ target_compile_options(compiler_flags INTERFACE
 ####################
 
 add_library(buffer_handler buffer_handler.cpp)
-add_library(buffer_writer buffer_writer.cpp)
 
 add_executable(buffer_test test/buffer_test.cpp)
 target_link_libraries(buffer_test PRIVATE compiler_flags buffer_handler buffer_writer)
