@@ -35,13 +35,11 @@ namespace CoverageControl {
         return tx_buf_;
     }
 
-    void BufferHandler::SetRXBuf(std::vector<Eigen::MatrixXf> buf){}
+    void BufferHandler::SetRXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {
+        rx_buf_ = buf_ptr;
+    }
 
-/*    Eigen::MatrixXf BufferHandler::GetTXBuf() {
-        return tx_buf;
+    std::shared_ptr<Eigen::MatrixXf> BufferHandler::GetRXBuf(){
+        return rx_buf_;
     }
-    std::vector<Eigen::MatrixXf> BufferHandler::GetRXBuf(){
-        return rx_buf;
-    }
-    */
 }

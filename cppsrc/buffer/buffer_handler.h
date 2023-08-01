@@ -17,7 +17,7 @@ namespace CoverageControl {
             bool tx_lock = false;
             bool rx_lock = false;
             std::shared_ptr<Eigen::MatrixXf> tx_buf_ = nullptr;
-            std::vector<Eigen::MatrixXf> rx_buf;
+            std::shared_ptr<Eigen::MatrixXf> rx_buf_ = nullptr;
 
         public:
             BufferHandler(const int L, 
@@ -38,12 +38,10 @@ namespace CoverageControl {
             bool GetTXLock();
             bool GetRXLock();
             
-            // TODO update return and parameter types etc
             void SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
             std::shared_ptr<Eigen::MatrixXf> GetTXBuf();
-            void SetRXBuf(std::vector<Eigen::MatrixXf> buf);
-            //Eigen::MatrixXf GetTxBuf();
-            //std::vector<Eigen::MatrixXf> GetRxBuf();
+            void SetRXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
+            std::shared_ptr<Eigen::MatrixXf> GetRXBuf();
 
             // TODO Filtering step (send relevant robots)
             // TODO create communication map (positions of robots at a minimum)
