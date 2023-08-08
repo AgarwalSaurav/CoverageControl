@@ -2,28 +2,13 @@
 
 namespace CoverageControl {
 
-    void BufferHandler::TriggerGNN() {
-        rx_lock = true;
-        tx_lock = true;
-
-        // TODO call appropriate functions, maybe some other stuff... 
+    void BufferHandler::Trigger(Eigen::MatrixXf &msg, Point2 v) {
+        // TODO some conversion of msg
+        Eigen::MatrixXf tx_msg_prime = msg;
+        // 0. drone_ctl.set_velocity(v);
+        // 1. udp_tx.Trigger(tx_msg_prime);
+        // 2. auto[rx_msg, n_pos, pos] udp_rx.Trigger();
         return;
-    }
-
-    void BufferHandler::ReleaseRXLock() {
-        rx_lock = false;
-    }
-
-    void BufferHandler::ReleaseTXLock() {
-        tx_lock = false;
-    }
-
-    bool BufferHandler::GetTXLock() {
-        return tx_lock;
-    }
-
-    bool BufferHandler::GetRXLock() {
-        return rx_lock;
     }
 
     void BufferHandler::SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {

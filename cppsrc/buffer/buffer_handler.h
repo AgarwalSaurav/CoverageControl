@@ -17,9 +17,9 @@ namespace CoverageControl {
             std::shared_ptr<Eigen::MatrixXf> tx_buf_ = nullptr;
             std::shared_ptr<Eigen::MatrixXf> rx_buf_ = nullptr;
 
+            //std::shared_ptr<Eigen::MatrixXf> ConvertTXBuf_(Eigen::MatrixXf &msg);
+
         public:
-            bool tx_lock = false;
-            bool rx_lock = false;
             BufferHandler(const int L, 
                         const int K,
                         const int G,
@@ -31,13 +31,9 @@ namespace CoverageControl {
                         X_0_{X_0},
                         pt_{pt}
                         {}
-            void TriggerGNN(); //locks the tx and rx buffers
-            void ReleaseTXLock();
-            void ReleaseRXLock();
 
-            bool GetTXLock();
-            bool GetRXLock();
-            
+            void Trigger(Eigen::MatrixXf &msg, Point2 v);
+
             void SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
             std::shared_ptr<Eigen::MatrixXf> GetTXBuf();
             void SetRXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
