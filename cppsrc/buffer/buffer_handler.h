@@ -14,12 +14,12 @@ namespace CoverageControl {
             int X_0_;
             Point2 pt_;
 
-            bool tx_lock = false;
-            bool rx_lock = false;
             std::shared_ptr<Eigen::MatrixXf> tx_buf_ = nullptr;
             std::shared_ptr<Eigen::MatrixXf> rx_buf_ = nullptr;
 
         public:
+            bool tx_lock = false;
+            bool rx_lock = false;
             BufferHandler(const int L, 
                         const int K,
                         const int G,

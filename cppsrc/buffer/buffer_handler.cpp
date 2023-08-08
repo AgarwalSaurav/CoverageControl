@@ -19,14 +19,13 @@ namespace CoverageControl {
     }
 
     bool BufferHandler::GetTXLock() {
-        return rx_lock;
-    }
-
-    bool BufferHandler::GetRXLock() {
         return tx_lock;
     }
 
-    // TODO sort out type and if and where to use pointer for buf
+    bool BufferHandler::GetRXLock() {
+        return rx_lock;
+    }
+
     void BufferHandler::SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {
         tx_buf_ = buf_ptr;
     }

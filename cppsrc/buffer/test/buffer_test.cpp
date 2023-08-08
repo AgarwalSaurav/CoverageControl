@@ -22,6 +22,37 @@ namespace CoverageControl{
         BOOST_TEST(tx_expected == tx_actual);
     }
 
+    BOOST_AUTO_TEST_CASE(ReleaseRXLockTest) {
+        bool rx_expected = false;
+
+        // Trigger first
+        Point2 coord(1.0,1.0);
+        BufferHandler buf(5, 2, 256, 0, coord);
+        buf.TriggerGNN();
+        
+        // Release
+        buf.ReleaseRXLock();
+
+        bool rx_actual = buf.GetRXLock();
+
+        BOOST_TEST(rx_actual == rx_expected);
+    }
+
+    BOOST_AUTO_TEST_CASE(ReleaseTXLockTest) {
+        bool tx_expected = false;
+
+        // Trigger first
+        Point2 coord(1.0,1.0);
+        BufferHandler buf(5, 2, 256, 0, coord);
+        buf.TriggerGNN();
+        
+        // Release
+        buf.ReleaseTXLock();
+        bool tx_actual = buf.GetTXLock();
+
+        BOOST_TEST(tx_actual == tx_expected);
+    }
+
     BOOST_AUTO_TEST_CASE(BufferSetTXTest) {
         std::shared_ptr<Eigen::MatrixXf> test_ptr = std::make_shared<Eigen::MatrixXf>(5,2);
         Point2 coord(1.0,1.0);
@@ -39,6 +70,4 @@ namespace CoverageControl{
         std::shared_ptr<Eigen::MatrixXf> ptr = buf.GetRXBuf();
         BOOST_TEST(ptr == test_ptr);
     }
-
-    
 }
