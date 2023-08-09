@@ -2,10 +2,14 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <vector> 
+#include <random>
 
 int main() {
-    const char* message = "Hello, multicast!";
     int intervalSeconds = 2;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dist(0.0f, 1.0f);
 
     while (true) {
         // Access the shared buffer
@@ -14,6 +18,10 @@ int main() {
         //}
 
         // Call the sendMulticastMessage function with the given message
+        std::vector<float> message;
+        for (int i = 0; i < 1024; ++i) {
+            message.push_back(dist(gen));
+        }
         sendMulticastMessage(message);
 
         // Sleep for the specified interval
