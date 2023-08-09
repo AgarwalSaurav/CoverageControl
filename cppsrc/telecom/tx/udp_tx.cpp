@@ -7,6 +7,7 @@
 #include <net/if.h>
 #include <vector> 
 
+
 UDP_TX::UDP_TX(std::string ifname){
 
     // TODO change string literal
@@ -27,10 +28,10 @@ UDP_TX::UDP_TX(std::string ifname){
     }
 
     // Set up server address
-    sockaddr_in serverAddr{};
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(901); // Set the desired port (900 in this case)
-    serverAddr.sin_addr.s_addr = inet_addr("224.0.0.251"); // Set the desired IP address (224.0.0.251 in this case)
+    sockaddr_in serverAddr_{};
+    serverAddr_.sin_family = AF_INET;
+    serverAddr_.sin_port = htons(901); // Set the desired port (900 in this case)
+    serverAddr_.sin_addr.s_addr = inet_addr("224.0.0.251"); // Set the desired IP address (224.0.0.251 in this case)
 }
 
 UDP_TX::~UDP_TX(){
@@ -38,24 +39,38 @@ UDP_TX::~UDP_TX(){
     close(sockfd_);
 }
 
-void UDP_TX::Transmit(const std::vector<float>& message) {
+void UDP_TX::Transmit() {
+    std::vector<float> message;
 
-    // Prepare the message to be sent
-    size_t messageLength = message.size() * sizeof(float);
+    while(true){
+        if(!lock_){
+            if (tx_msg_ptr_ != nullptr){
+                message = *tx_msg_ptr_;
+            }
+        }
+        // Prepare the message to be sent
+        size_t messageLength = message.size() * sizeof(float);
 
-    // Send the message
-    ssize_t numBytesSent = sendto(sockfd_, reinterpret_cast<const char*>(message.data()), messageLength, 0, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr));
-    if (numBytesSent == -1) {
-        std::cerr << "Failed to send message." << std::endl;
-        close(sockfd_);
-        return;
+        // Send the message
+        ssize_t numBytesSent = sendto(sockfd_, reinterpret_cast<const char*>(message.data()), messageLength, 0, reinterpret_cast<sockaddr*>(&serverAddr_), sizeof(serverAddr_));
+        if (numBytesSent == -1) {
+            std::cerr << "Failed to send message." << std::endl;
+            close(sockfd_);
+            return;
+        }
+
+        std::cout << "Sent message of size: " << messageLength << " bytes." << std::endl;
+        
+        // TODO sleep adjustment
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-
-    std::cout << "Sent message of size: " << messageLength << " bytes." << std::endl;
-    // TODO put a sleep variable
     return;
 }
 
 void UDP_TX::Trigger(std::shared_ptr<std::vector<float>> message){
+    lock_ = true;
+    // TODO make lock_guard / mutex
+    tx_msg_ptr_ = message;
+    lock_ = false;
     return;
 }
