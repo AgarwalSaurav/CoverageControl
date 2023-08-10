@@ -1,14 +1,3 @@
-#include <iostream>
-#include <cstring>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <net/if.h>
-#include <vector>
-#include <arpa/inet.h>
-#include <memory>
-#include "SharedBuffer.h"
 #include "udp_rx.h"
 
 UDP_RX::UDP_RX(){
@@ -28,13 +17,13 @@ UDP_RX::UDP_RX(){
     }
 
     // Set up server address
-    sockaddr_in serverAddr_{};
     serverAddr_.sin_family = AF_INET;
     serverAddr_.sin_port = htons(901); // Set the desired port (900 in this case)
     serverAddr_.sin_addr.s_addr = inet_addr("224.0.0.251"); // Set the desired IP address (224.0.0.251 in this case)
 
     // Bind the socket to the server address
     if (bind(sockfd_, reinterpret_cast<sockaddr*>(&serverAddr_), sizeof(serverAddr_)) == -1) {
+        perror("Failed to bind socket");
         std::cerr << "Failed to bind socket." << std::endl;
         close(sockfd_);
     }
@@ -49,8 +38,6 @@ UDP_RX::~UDP_RX(){
 
 void UDP_RX::Receive() {
 
-    char sharedBuffer[NUM_IPS][BUFFER_SIZE] = {0};
-
     // Receive and handle incoming messages
     std::vector<float> buffer(BUFFER_SIZE / sizeof(float));
     sockaddr_in clientAddr{};
@@ -61,6 +48,7 @@ void UDP_RX::Receive() {
         // Receive message from a client
         numBytesReceived = recvfrom(sockfd_, buffer.data(), BUFFER_SIZE, 0, reinterpret_cast<sockaddr*>(&clientAddr), &clientAddrLen);
         if (numBytesReceived == -1) {
+            perror("Receive Failed");
             std::cerr << "Failed to receive message." << std::endl;
             close(sockfd_);
         }
@@ -95,8 +83,9 @@ void UDP_RX::Receive() {
     return;
 }
 
+
 // TODO change return
-std::shared_ptr<char**> UDP_RX::Trigger(){
+/*std::shared_ptr<char**> UDP_RX::Trigger(){
     lock_ = true;
     // copy of buffer
     for (int i = 0; i < NUM_IPS; i++) {
@@ -108,6 +97,7 @@ std::shared_ptr<char**> UDP_RX::Trigger(){
     // clear original shared buffer
     memset(sharedBuffer, 0, sizeof(sharedBuffer));
 
+
     std::shared_ptr<char**> buf_ptr = std::make_shared<char**>(cpy_sharedBuffer);
 
     // set lock to false
@@ -117,4 +107,4 @@ std::shared_ptr<char**> UDP_RX::Trigger(){
 
     // shared pointer to shared buffer
     return buf_ptr;
-}
+}*/

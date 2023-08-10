@@ -1,6 +1,6 @@
 CC := g++
 CFLAGS := -Wall -Wextra -std=c++11
-SRCS := udp_rx.cpp
+SRCS := udp_rx.cpp main.cpp
 OBJS := $(SRCS:%.cpp=build/%.o)
 EXECUTABLE := build/program
 
