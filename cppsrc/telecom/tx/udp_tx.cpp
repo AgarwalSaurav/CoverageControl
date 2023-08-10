@@ -7,10 +7,10 @@
 #include <net/if.h>
 #include <vector> 
 
-UDP_TX::UDP_TX(std::string ifname){
+UDP_TX::UDP_TX(){
 
     // TODO change string literal
-    std::string ifname_ = ifname;
+    std::string ifname_ = "adhoc";
 
     // Create a socket
     sockfd_ = socket(AF_INET, SOCK_DGRAM, 0);
@@ -27,10 +27,10 @@ UDP_TX::UDP_TX(std::string ifname){
     }
 
     // Set up server address
-    sockaddr_in serverAddr_{};
     serverAddr_.sin_family = AF_INET;
     serverAddr_.sin_port = htons(901); // Set the desired port (900 in this case)
     serverAddr_.sin_addr.s_addr = inet_addr("224.0.0.251"); // Set the desired IP address (224.0.0.251 in this case)
+    
 }
 
 UDP_TX::~UDP_TX(){
@@ -42,6 +42,7 @@ void UDP_TX::Transmit() {
     // hang until we get the first message
     while(tx_msg_ptr_ == nullptr){
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::cout << "Waiting for message..." << std::endl;
     }
 
     std::vector<float> message;
@@ -54,10 +55,20 @@ void UDP_TX::Transmit() {
         }
         // Prepare the message to be sent
         size_t messageLength = message.size() * sizeof(float);
+        
+
+        //std::string new_message = "helloworld";
+        //size_t messageLength = new_message.size() * sizeof(char);
+
+        /*for(char val : new_message){
+            std::cout << val << std::endl;
+        }*/
+        //std::cout << sockfd_ << std::endl;
 
         // Send the message
         ssize_t numBytesSent = sendto(sockfd_, reinterpret_cast<const char*>(message.data()), messageLength, 0, reinterpret_cast<sockaddr*>(&serverAddr_), sizeof(serverAddr_));
         if (numBytesSent == -1) {
+            perror("sendto error");
             std::cerr << "Failed to send message." << std::endl;
             close(sockfd_);
             return;
