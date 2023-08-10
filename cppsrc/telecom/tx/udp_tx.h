@@ -20,5 +20,5 @@ class UDP_TX{
         void Transmit();
         void Trigger(std::shared_ptr<std::vector<float>> message);
         // TODO get position from done()
-}
+};
 #endif // MULTICASTSENDER_H

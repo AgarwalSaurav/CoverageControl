@@ -7,7 +7,6 @@
 #include <net/if.h>
 #include <vector> 
 
-
 UDP_TX::UDP_TX(std::string ifname){
 
     // TODO change string literal
@@ -40,6 +39,11 @@ UDP_TX::~UDP_TX(){
 }
 
 void UDP_TX::Transmit() {
+    // hang until we get the first message
+    while(tx_msg_ptr_ == nullptr){
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+
     std::vector<float> message;
 
     while(true){
