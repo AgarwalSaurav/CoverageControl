@@ -2,7 +2,7 @@
 
 int main(){
 
-    UDP_RX udprx;
+    CoverageControl::UDP_RX udprx;
     udprx.Receive();
 
     return 0;

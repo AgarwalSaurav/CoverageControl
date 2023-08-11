@@ -10,7 +10,7 @@
 int main(){
 
     CoverageControl::BufferHandler buf;
-    UDP_TX udptx;
+    CoverageControl::UDP_TX udptx;
 
     buf.Trigger(udptx);
     udptx.Transmit();

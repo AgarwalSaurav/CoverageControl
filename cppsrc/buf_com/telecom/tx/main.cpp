@@ -24,7 +24,7 @@ int main() {
 
     std::shared_ptr<std::vector<float>> msg_ptr = std::make_shared<std::vector<float>>(message);
 
-    UDP_TX udptx;
+    CoverageControl::UDP_TX udptx;
     udptx.Trigger(msg_ptr);
     udptx.Transmit();
 
