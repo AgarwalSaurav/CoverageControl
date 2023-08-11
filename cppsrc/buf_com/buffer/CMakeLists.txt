@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 project(CoverageControlMain VERSION 0.3 LANGUAGES CUDA CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_COLOR_DIAGNOSTICS ON)
 
@@ -17,7 +17,7 @@ include_directories("/usr/local/include/eigen3")
 include_directories("/root/CoverageControl_ws/src/CoverageControl/cppsrc/core/include/CoverageControl/")
 
 add_library(compiler_flags INTERFACE)
-target_compile_features(compiler_flags INTERFACE cxx_std_17)
+target_compile_features(compiler_flags INTERFACE cxx_std_20)
 
 set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
 set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
