@@ -12,6 +12,8 @@ find_package(CGAL REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(CoverageControlCore REQUIRED)
 find_package(CoverageControlTorch REQUIRED)
+find_package(Boost REQUIRED COMPONENTS program_options)
+
 
 include_directories("/usr/local/include/eigen3")
 include_directories("/root/CoverageControl_ws/src/CoverageControl/cppsrc/core/include/CoverageControl/")
@@ -40,4 +42,4 @@ add_subdirectory(telecom/rx)
 
 add_executable(main main.cpp)
 # after private add eigen
-target_link_libraries(main PRIVATE Eigen3::Eigen compiler_flags buffer_handler udp_tx udp_rx)
+target_link_libraries(main PRIVATE Boost::program_options Eigen3::Eigen compiler_flags buffer_handler udp_tx udp_rx)
