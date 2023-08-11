@@ -2,8 +2,12 @@
 #define COVERAGECONTROL_BUFFER_HANDLER
 
 #include <memory>
+#include <vector>
+#include <chrono>
+#include <random>
 #include <Eigen/Dense>
 #include "typedefs.h"
+#include "udp_tx.h"
 
 namespace CoverageControl {
     class BufferHandler{
@@ -14,12 +18,13 @@ namespace CoverageControl {
             int X_0_;
             Point2 pt_;
 
-            std::shared_ptr<Eigen::MatrixXf> tx_buf_ = nullptr;
-            std::shared_ptr<Eigen::MatrixXf> rx_buf_ = nullptr;
-
+            std::vector<float> msg_;
+            std::shared_ptr<Eigen::MatrixXf> tx_msg_ = nullptr;
+            std::shared_ptr<std::vector<float>> tx_msg_prime_ = nullptr;
             //std::shared_ptr<Eigen::MatrixXf> ConvertTXBuf_(Eigen::MatrixXf &msg);
 
         public:
+            BufferHandler();
             BufferHandler(const int L, 
                         const int K,
                         const int G,
@@ -32,12 +37,7 @@ namespace CoverageControl {
                         pt_{pt}
                         {}
 
-            void Trigger(Eigen::MatrixXf &msg, Point2 v);
-
-            void SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
-            std::shared_ptr<Eigen::MatrixXf> GetTXBuf();
-            void SetRXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr);
-            std::shared_ptr<Eigen::MatrixXf> GetRXBuf();
+            void Trigger(UDP_TX &udp_tx);
 
             // TODO Filtering step (send relevant robots)
             // TODO create communication map (positions of robots at a minimum)

@@ -2,28 +2,33 @@
 
 namespace CoverageControl {
 
-    void BufferHandler::Trigger(Eigen::MatrixXf &msg, Point2 v) {
-        // TODO some conversion of msg
-        Eigen::MatrixXf tx_msg_prime = msg;
+    BufferHandler::BufferHandler(){
+        // Generate a random message for testing purposes
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+
+        // Call the sendMulticastmsg_ function with the given msg_
+        for (int i = 0; i < 1024; ++i) {
+            msg_.push_back(dist(gen));
+        }
+    }
+
+    void BufferHandler::Trigger(UDP_TX &udp_tx) {
+        // TODO add arguments
+        
+        // Buffer owns the memory unless it deletes it before telecom is done
+        tx_msg_prime_ = std::make_shared<std::vector<float>>(msg_);
+
         // 0. drone_ctl.set_velocity(v);
-        // 1. udp_tx.Trigger(tx_msg_prime);
-        // 2. auto[rx_msg, n_pos, pos] udp_rx.Trigger();
+        // TODO
+
+        // 1. TX Trigger to load new message into transmiter
+        udp_tx.Trigger(tx_msg_prime_);
+
+        // 2. auto[rx_msg_, n_pos, pos] udp_rx.Trigger();
+        // TODO
+
         return;
-    }
-
-    void BufferHandler::SetTXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {
-        tx_buf_ = buf_ptr;
-    }
-
-    std::shared_ptr<Eigen::MatrixXf> BufferHandler::GetTXBuf(){
-        return tx_buf_;
-    }
-
-    void BufferHandler::SetRXBuf(const std::shared_ptr<Eigen::MatrixXf> buf_ptr) {
-        rx_buf_ = buf_ptr;
-    }
-
-    std::shared_ptr<Eigen::MatrixXf> BufferHandler::GetRXBuf(){
-        return rx_buf_;
     }
 }

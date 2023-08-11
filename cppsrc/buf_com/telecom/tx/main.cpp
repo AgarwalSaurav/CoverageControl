@@ -30,7 +30,6 @@ int main() {
 
     // Sleep for the specified interval
     std::this_thread::sleep_for(std::chrono::seconds(intervalSeconds));
-    
 
     return 0;
 }
