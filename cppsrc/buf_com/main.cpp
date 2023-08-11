@@ -12,8 +12,6 @@ namespace CC = CoverageControl;
 namespace po = boost::program_options;
 
 int main(int argc, char* argv[]){
-    //std::cout << "Hello World" << std::endl;
-
     bool isTX;
     bool isRX;
 
@@ -59,10 +57,9 @@ int main(int argc, char* argv[]){
         udptx.Transmit();
     }
     else if(isRX){
-        std::cout << "RX not implemented yet" << std::endl;
+        CC::UDP_RX udprx;
+        udprx.Receive();
     }
 
-    // Sleep for the specified interval
-    //std::this_thread::sleep_for(std::chrono::seconds(intervalSeconds));
     return 0;
 }
