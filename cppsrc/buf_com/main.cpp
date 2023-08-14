@@ -49,16 +49,17 @@ int main(int argc, char* argv[]){
         return -1;
     }
 
+    CC::BufferHandler buf;
+
     if(isTX){
-        CC::BufferHandler buf;
         CC::UDP_TX udptx;
 
         buf.Trigger(udptx);
-        udptx.Transmit();
+        std::jthread tx_th(&CC::UDP_TX::Transmit, &udptx);
     }
     else if(isRX){
         CC::UDP_RX udprx;
-        udprx.Receive();
+        std::jthread rx_th(&CC::UDP_RX::Receive, &udprx);
     }
 
     return 0;
