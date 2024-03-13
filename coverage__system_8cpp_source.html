@@ -56,7 +56,7 @@ window.MathJax = {
 						<tbody>
 							<tr id="projectrow">
 								<td id="projectalign">
-									<div id="projectname">Coverage Control Library<span id="projectnumber">&#160;1.0.0</span>
+									<div id="projectname">Coverage Control Library
 									</div>
 								</td>
 							</tr>
@@ -304,7 +304,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>      MapType::Constant(params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a012d80426433506f0393a2d1ced26bfe">pWorldMapSize</a>, params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a012d80426433506f0393a2d1ced26bfe">pWorldMapSize</a>, 1);</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  explored_idf_map_ =</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>      MapType::Constant(params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a012d80426433506f0393a2d1ced26bfe">pWorldMapSize</a>, params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a012d80426433506f0393a2d1ced26bfe">pWorldMapSize</a>, 0);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  total_idf_weight_ = GetWorldIDF().sum();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  total_idf_weight_ = GetWorldMap().sum();</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  adjacency_matrix_.resize(num_robots_);</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  relative_positions_neighbors_.resize(num_robots_);</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  neighbor_ids_.resize(num_robots_);</div>
@@ -558,7 +558,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>                     params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#ad64f0471d84035f9821a8b7cc8ae0073">pCommunicationRange</a>);</div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    <span class="keyword">auto</span> iPlotterVoronoi = plotter_voronoi;</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    iPlotterVoronoi.SetPlotName(<span class="stringliteral">&quot;voronoi_map&quot;</span>, i);</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    iPlotterVoronoi.PlotMap(GetWorldIDF(), plotter_data_[i].positions,</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    iPlotterVoronoi.PlotMap(GetWorldMap(), plotter_data_[i].positions,</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>                            plotter_data_[i].voronoi,</div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>                            plotter_data_[i].positions_history);</div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>  }</div>
@@ -585,7 +585,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>                                    std::string <span class="keyword">const</span> &amp;map_name) {</div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>  PlotterData data;</div>
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>  <span class="keywordflow">if</span> (map_name == <span class="stringliteral">&quot;world&quot;</span>) {</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    data.map = GetWorldIDF();</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    data.map = GetWorldMap();</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>    data.map = system_map_;</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>  }</div>
@@ -635,7 +635,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>  plotter.SetScale(1);</div>
 <div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>  plotter.SetPlotName(map_name);</div>
 <div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>  std::vector&lt;int&gt; robot_status(num_robots_, 0);</div>
-<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>  plotter.PlotMap(GetWorldIDF(), robot_global_positions_,</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>  plotter.PlotMap(GetWorldMap(), robot_global_positions_,</div>
 <div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>                  robot_positions_history_, robot_status);</div>
 <div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>}</div>
 <div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span> </div>
@@ -645,7 +645,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>                  params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a003727b70c2e2cd53bfadf0ad5109ec1">pResolution</a>);</div>
 <div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>  plotter.SetScale(1);</div>
 <div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>  plotter.SetPlotName(map_name);</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>  plotter.PlotMap(GetWorldIDF());</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>  plotter.PlotMap(GetWorldMap());</div>
 <div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>}</div>
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span> </div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span><span class="keywordtype">void</span> CoverageSystem::PlotInitMap(std::string <span class="keyword">const</span> &amp;dir_name,</div>
@@ -654,7 +654,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>                  params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a003727b70c2e2cd53bfadf0ad5109ec1">pResolution</a>);</div>
 <div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>  plotter.SetScale(2);</div>
 <div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>  plotter.SetPlotName(map_name);</div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>  plotter.PlotMap(GetWorldIDF(), robot_global_positions_);</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>  plotter.PlotMap(GetWorldMap(), robot_global_positions_);</div>
 <div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>}</div>
 <div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span> </div>
 <div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span><span class="keywordtype">void</span> CoverageSystem::PlotMapVoronoi(std::string <span class="keyword">const</span> &amp;dir_name,</div>
@@ -664,7 +664,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>                  params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a003727b70c2e2cd53bfadf0ad5109ec1">pResolution</a>);</div>
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>  plotter.SetScale(2);</div>
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>  plotter.SetPlotName(<span class="stringliteral">&quot;voronoi_map&quot;</span>, step);</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>  plotter.PlotMap(GetWorldIDF(), robot_global_positions_, voronoi_,</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>  plotter.PlotMap(GetWorldMap(), robot_global_positions_, voronoi_,</div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>                  robot_positions_history_);</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>}</div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
@@ -675,7 +675,7 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>                  params_.<a class="code hl_variable" href="classCoverageControl_1_1Parameters.html#a003727b70c2e2cd53bfadf0ad5109ec1">pResolution</a>);</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>  plotter.SetScale(2);</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>  plotter.SetPlotName(<span class="stringliteral">&quot;map&quot;</span>, step);</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>  plotter.PlotMap(GetWorldIDF(), robot_global_positions_, goals, voronoi);</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>  plotter.PlotMap(GetWorldMap(), robot_global_positions_, goals, voronoi);</div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>}</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span><span class="keywordtype">void</span> CoverageSystem::PlotFrontiers(std::string <span class="keyword">const</span> &amp;dir_name, <span class="keywordtype">int</span> <span class="keyword">const</span> &amp;step,</div>
@@ -819,8 +819,8 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>}  <span class="comment">// namespace CoverageControl</span></div>
 <div class="ttc" id="aclassCoverageControl_1_1BivariateNormalDistribution_html"><div class="ttname"><a href="classCoverageControl_1_1BivariateNormalDistribution.html">CoverageControl::BivariateNormalDistribution</a></div><div class="ttdoc">Class for Bivariate Normal Distribution.</div><div class="ttdef"><b>Definition</b> <a href="bivariate__normal__distribution_8h_source.html#l00055">bivariate_normal_distribution.h:55</a></div></div>
 <div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html">CoverageControl::CoverageSystem</a></div><div class="ttdoc">The CoverageSystem class is the main class for the coverage control library.</div><div class="ttdef"><b>Definition</b> <a href="coverage__system_8h_source.html#l00068">coverage_system.h:68</a></div></div>
-<div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a016b2199a409bc057e834a38eb14e6d3"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a016b2199a409bc057e834a38eb14e6d3">CoverageControl::CoverageSystem::GetRobotPositions</a></div><div class="ttdeci">PointVector GetRobotPositions(bool force_no_noise=false)</div><div class="ttdoc">Get the global positions of all robots.</div><div class="ttdef"><b>Definition</b> <a href="coverage__system_8h_source.html#l00480">coverage_system.h:480</a></div></div>
-<div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a29c3aef0048e7d322d201e96d52c2524"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a29c3aef0048e7d322d201e96d52c2524">CoverageControl::CoverageSystem::StepControl</a></div><div class="ttdeci">bool StepControl(size_t robot_id, Point2 const &amp;direction, double const speed)</div><div class="ttdoc">Execute velocity control for robot_id.</div><div class="ttdef"><b>Definition</b> <a href="coverage__system_8h_source.html#l00316">coverage_system.h:316</a></div></div>
+<div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a016b2199a409bc057e834a38eb14e6d3"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a016b2199a409bc057e834a38eb14e6d3">CoverageControl::CoverageSystem::GetRobotPositions</a></div><div class="ttdeci">PointVector GetRobotPositions(bool force_no_noise=false)</div><div class="ttdoc">Get the global positions of all robots.</div><div class="ttdef"><b>Definition</b> <a href="coverage__system_8h_source.html#l00479">coverage_system.h:479</a></div></div>
+<div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a29c3aef0048e7d322d201e96d52c2524"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a29c3aef0048e7d322d201e96d52c2524">CoverageControl::CoverageSystem::StepControl</a></div><div class="ttdeci">bool StepControl(size_t robot_id, Point2 const &amp;direction, double const speed)</div><div class="ttdoc">Execute velocity control for robot_id.</div><div class="ttdef"><b>Definition</b> <a href="coverage__system_8h_source.html#l00315">coverage_system.h:315</a></div></div>
 <div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a61ecedaaa641b044ddd93eafe101edcc"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a61ecedaaa641b044ddd93eafe101edcc">CoverageControl::CoverageSystem::StepRobotsToGoals</a></div><div class="ttdeci">bool StepRobotsToGoals(PointVector const &amp;goals, PointVector &amp;actions)</div><div class="ttdef"><b>Definition</b> <a href="#l00306">coverage_system.cpp:306</a></div></div>
 <div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_a6d0fb1a19ee057e5d274e1b8fc9f9ea5"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#a6d0fb1a19ee057e5d274e1b8fc9f9ea5">CoverageControl::CoverageSystem::CoverageSystem</a></div><div class="ttdeci">CoverageSystem()=delete</div></div>
 <div class="ttc" id="aclassCoverageControl_1_1CoverageSystem_html_ad1564d664d0a25a0a5b5a4a8b25df010"><div class="ttname"><a href="classCoverageControl_1_1CoverageSystem.html#ad1564d664d0a25a0a5b5a4a8b25df010">CoverageControl::CoverageSystem::StepRobotToGoal</a></div><div class="ttdeci">bool StepRobotToGoal(int const robot_id, Point2 const &amp;goal, double const speed_factor=1)</div><div class="ttdef"><b>Definition</b> <a href="#l00286">coverage_system.cpp:286</a></div></div>
@@ -837,11 +837,11 @@ $(function(){initNavTree('coverage__system_8cpp_source.html',''); initResizable(
 <div class="ttc" id="aclassCoverageControl_1_1RobotModel_html"><div class="ttname"><a href="classCoverageControl_1_1RobotModel.html">CoverageControl::RobotModel</a></div><div class="ttdoc">Class for handling the robot model.</div><div class="ttdef"><b>Definition</b> <a href="robot__model_8h_source.html#l00061">robot_model.h:61</a></div></div>
 <div class="ttc" id="aclassCoverageControl_1_1Voronoi_html"><div class="ttname"><a href="classCoverageControl_1_1Voronoi.html">CoverageControl::Voronoi</a></div><div class="ttdoc">Class for computing Voronoi cells.</div><div class="ttdef"><b>Definition</b> <a href="voronoi_8h_source.html#l00119">voronoi.h:119</a></div></div>
 <div class="ttc" id="aclassCoverageControl_1_1WorldIDF_html"><div class="ttname"><a href="classCoverageControl_1_1WorldIDF.html">CoverageControl::WorldIDF</a></div><div class="ttdoc">Class for Importance Density Function (IDF) for the world.</div><div class="ttdef"><b>Definition</b> <a href="world__idf_8h_source.html#l00066">world_idf.h:66</a></div></div>
-<div class="ttc" id="aclassCoverageControl_1_1WorldIDF_html_ab9add37d675c45464964b993295c4c78"><div class="ttname"><a href="classCoverageControl_1_1WorldIDF.html#ab9add37d675c45464964b993295c4c78">CoverageControl::WorldIDF::AddNormalDistribution</a></div><div class="ttdeci">void AddNormalDistribution(BivariateNormalDistribution const &amp;distribution)</div><div class="ttdef"><b>Definition</b> <a href="world__idf_8h_source.html#l00255">world_idf.h:255</a></div></div>
+<div class="ttc" id="aclassCoverageControl_1_1WorldIDF_html_ab9add37d675c45464964b993295c4c78"><div class="ttname"><a href="classCoverageControl_1_1WorldIDF.html#ab9add37d675c45464964b993295c4c78">CoverageControl::WorldIDF::AddNormalDistribution</a></div><div class="ttdeci">void AddNormalDistribution(BivariateNormalDistribution const &amp;distribution)</div><div class="ttdef"><b>Definition</b> <a href="world__idf_8h_source.html#l00322">world_idf.h:322</a></div></div>
 <div class="ttc" id="acoverage__system_8h_html"><div class="ttname"><a href="coverage__system_8h.html">coverage_system.h</a></div><div class="ttdoc">The file contains the CoverageSystem class, which is the main class for the coverage control library.</div></div>
 <div class="ttc" id="agroup__cpp__api__constants_html_ga7303a45a00c71dfb231fb50b2af09b05"><div class="ttname"><a href="group__cpp__api__constants.html#ga7303a45a00c71dfb231fb50b2af09b05">CoverageControl::kLargeEps</a></div><div class="ttdeci">double const kLargeEps</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00050">constants.h:50</a></div></div>
-<div class="ttc" id="agroup__cpp__api__constants_html_gad08691d2b43666bbc3f8411c3fd3ea7e"><div class="ttname"><a href="group__cpp__api__constants.html#gad08691d2b43666bbc3f8411c3fd3ea7e">CoverageControl::kMaxPrecision</a></div><div class="ttdeci">constexpr auto kMaxPrecision</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00055">constants.h:55</a></div></div>
-<div class="ttc" id="agroup__cpp__api__typedefs_html_ga3eb2c9229531009f43635928ad308da6"><div class="ttname"><a href="group__cpp__api__typedefs.html#ga3eb2c9229531009f43635928ad308da6">CoverageControl::PointVector</a></div><div class="ttdeci">std::vector&lt; Point2 &gt; PointVector</div><div class="ttdef"><b>Definition</b> <a href="typedefs_8h_source.html#l00050">typedefs.h:50</a></div></div>
+<div class="ttc" id="agroup__cpp__api__constants_html_gad08691d2b43666bbc3f8411c3fd3ea7e"><div class="ttname"><a href="group__cpp__api__constants.html#gad08691d2b43666bbc3f8411c3fd3ea7e">CoverageControl::kMaxPrecision</a></div><div class="ttdeci">constexpr auto kMaxPrecision</div><div class="ttdef"><b>Definition</b> <a href="constants_8h_source.html#l00056">constants.h:56</a></div></div>
+<div class="ttc" id="agroup__cpp__api__typedefs_html_ga3eb2c9229531009f43635928ad308da6"><div class="ttname"><a href="group__cpp__api__typedefs.html#ga3eb2c9229531009f43635928ad308da6">CoverageControl::PointVector</a></div><div class="ttdeci">std::vector&lt; Point2 &gt; PointVector</div><div class="ttdef"><b>Definition</b> <a href="typedefs_8h_source.html#l00051">typedefs.h:51</a></div></div>
 <div class="ttc" id="agroup__cpp__api__typedefs_html_ga3f07f168f209ff3416eae7485cf2b2ec"><div class="ttname"><a href="group__cpp__api__typedefs.html#ga3f07f168f209ff3416eae7485cf2b2ec">CoverageControl::Point2</a></div><div class="ttdeci">Eigen::Vector2d Point2</div><div class="ttdef"><b>Definition</b> <a href="typedefs_8h_source.html#l00044">typedefs.h:44</a></div></div>
 <div class="ttc" id="anamespaceCoverageControl_1_1MapUtils_html_a74ee1b41afab01261eb3d6b55bc074c3"><div class="ttname"><a href="namespaceCoverageControl_1_1MapUtils.html#a74ee1b41afab01261eb3d6b55bc074c3">CoverageControl::MapUtils::ComputeOffsets</a></div><div class="ttdeci">void ComputeOffsets(double const resolution, Point2 const &amp;pos, int const submap_size, int const map_size, MapBounds &amp;index, MapBounds &amp;offset)</div><div class="ttdef"><b>Definition</b> <a href="map__utils_8h_source.html#l00057">map_utils.h:57</a></div></div>
 <div class="ttc" id="anamespaceCoverageControl_html"><div class="ttname"><a href="namespaceCoverageControl.html">CoverageControl</a></div><div class="ttdoc">Namespace for the CoverageControl library.</div><div class="ttdef"><b>Definition</b> <a href="abstract__controller_8h_source.html#l00036">abstract_controller.h:36</a></div></div>

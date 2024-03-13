@@ -7,5 +7,6 @@ var searchData=
   ['klargeeps_4',['kLargeEps',['../group__cpp__api__constants.html#ga7303a45a00c71dfb231fb50b2af09b05',1,'CoverageControl']]],
   ['kmaxprecision_5',['kMaxPrecision',['../group__cpp__api__constants.html#gad08691d2b43666bbc3f8411c3fd3ea7e',1,'CoverageControl']]],
   ['konebysqrt2_6',['kOneBySqrt2',['../group__cpp__api__constants.html#ga845278ec96128e76681e0e8e6368ccad',1,'CoverageControl']]],
-  ['ksqrt2_7',['kSqrt2',['../group__cpp__api__constants.html#ga68173a231b63d8188abeb9a5f0f2b579',1,'CoverageControl']]]
+  ['konebysqrt2f_7',['kOneBySqrt2f',['../group__cpp__api__constants.html#gad78a5d79d202425ef7b63e9e5b0c62f8',1,'CoverageControl']]],
+  ['ksqrt2_8',['kSqrt2',['../group__cpp__api__constants.html#ga68173a231b63d8188abeb9a5f0f2b579',1,'CoverageControl']]]
 ];

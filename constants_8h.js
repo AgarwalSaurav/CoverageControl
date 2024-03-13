@@ -5,5 +5,6 @@ var constants_8h =
     [ "kLargeEps", "constants_8h.html#ga7303a45a00c71dfb231fb50b2af09b05", null ],
     [ "kMaxPrecision", "constants_8h.html#gad08691d2b43666bbc3f8411c3fd3ea7e", null ],
     [ "kOneBySqrt2", "constants_8h.html#ga845278ec96128e76681e0e8e6368ccad", null ],
+    [ "kOneBySqrt2f", "constants_8h.html#gad78a5d79d202425ef7b63e9e5b0c62f8", null ],
     [ "kSqrt2", "constants_8h.html#ga68173a231b63d8188abeb9a5f0f2b579", null ]
 ];

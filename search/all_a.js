@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['library_0',['Building the Core Library',['../installation.html#autotoc_md17',1,'']]],
-  ['license_1',['License',['../index.html#autotoc_md6',1,'']]],
-  ['lpac_20architecture_2',['LPAC Architecture',['../lpac.html',1,'LPAC Architecture'],['../lpac.html#autotoc_md33',1,'LPAC Architecture']]]
+  ['keps_0',['kEps',['../group__cpp__api__constants.html#ga5deba897e5581fb736ceb59c2a6feb5a',1,'CoverageControl']]],
+  ['kfloatmax_1',['kFloatMax',['../namespaceCoverageControl.html#a6a0b6d725318748eaa58165861adb78f',1,'CoverageControl']]],
+  ['kfloatmin_2',['kFloatMin',['../namespaceCoverageControl.html#a442da004e1f4be1a1125f6272a6c99bf',1,'CoverageControl']]],
+  ['kinfd_3',['kInfD',['../group__cpp__api__constants.html#ga5e878bac48ebe71bc1593bb64d33a3b7',1,'CoverageControl']]],
+  ['klargeeps_4',['kLargeEps',['../group__cpp__api__constants.html#ga7303a45a00c71dfb231fb50b2af09b05',1,'CoverageControl']]],
+  ['kmaxprecision_5',['kMaxPrecision',['../group__cpp__api__constants.html#gad08691d2b43666bbc3f8411c3fd3ea7e',1,'CoverageControl']]],
+  ['konebysqrt2_6',['kOneBySqrt2',['../group__cpp__api__constants.html#ga845278ec96128e76681e0e8e6368ccad',1,'CoverageControl']]],
+  ['konebysqrt2f_7',['kOneBySqrt2f',['../group__cpp__api__constants.html#gad78a5d79d202425ef7b63e9e5b0c62f8',1,'CoverageControl']]],
+  ['ksqrt2_8',['kSqrt2',['../group__cpp__api__constants.html#ga68173a231b63d8188abeb9a5f0f2b579',1,'CoverageControl']]]
 ];

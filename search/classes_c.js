@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['worldidf_0',['WorldIDF',['../classCoverageControl_1_1WorldIDF.html',1,'CoverageControl']]]
+  ['robotmodel_0',['RobotModel',['../classCoverageControl_1_1RobotModel.html',1,'CoverageControl']]]
 ];

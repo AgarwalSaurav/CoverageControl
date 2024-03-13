@@ -1,0 +1,9 @@
+<map id="GNNConfigParser" name="GNNConfigParser">
+<area shape="rect" id="Node000001" title=" " alt="" coords="75,5,203,30"/>
+<area shape="rect" id="Node000002" href="$classcoverage__control_1_1nn_1_1models_1_1gnn_1_1LPAC.html" title=" " alt="" coords="5,78,60,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,41,52,80,49,75,107,37"/>
+<area shape="rect" id="Node000003" href="$classcoverage__control_1_1nn_1_1models_1_1gnn__backbone_1_1GNNBackBone.html" title="Implements a multi&#45;layer graph convolutional neural network, with ReLU non&#45;linearities between layers..." alt="" coords="84,78,195,103"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,46,142,78,137,78,137,46"/>
+<area shape="rect" id="Node000004" href="$classcoverage__control_1_1nn_1_1models_1_1lpac_1_1LPAC.html" title=" " alt="" coords="219,78,273,103"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,37,230,75,227,80,168,41"/>
+</map>
