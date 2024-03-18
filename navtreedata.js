@@ -57,7 +57,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py_source.html",
-"topics.html"
+"structCoverageControl_1_1PolygonFeature.html#a81bda3e8f02a5ed6ee510e972e4adcd1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

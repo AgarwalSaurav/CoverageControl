@@ -92,6 +92,7 @@ var group__cpp__api =
       [ "AddNormalDistribution", "classCoverageControl_1_1WorldIDF.html#ab9add37d675c45464964b993295c4c78", null ],
       [ "AddNormalDistribution", "classCoverageControl_1_1WorldIDF.html#a58957784a130400a247328824951577d", null ],
       [ "AddUniformDistributionPolygon", "classCoverageControl_1_1WorldIDF.html#ade6915e56b624b23dffc85f25c0f11c1", null ],
+      [ "GenerateMapCPU", "classCoverageControl_1_1WorldIDF.html#a249129a9267eee0084fd46e18b8a0f70", null ],
       [ "WriteWorldMap", "classCoverageControl_1_1WorldIDF.html#ad9d2b62c3f1125c5253bec8cc03092b5", null ]
     ] ]
 ];

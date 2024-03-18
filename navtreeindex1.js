@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"structCoverageControl_1_1PolygonFeature.html#a81bda3e8f02a5ed6ee510e972e4adcd1":[5,0,1,0,0],
+"structCoverageControl_1_1VoronoiCell.html":[5,0,12],
 "topics.html":[5],
 "trainer_8py_source.html":[6,2,0,2,2,2],
 "typedefs_8h.html":[6,0,0,0,0,13],
