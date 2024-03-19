@@ -142,6 +142,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a47c7da780acfed1ff91d4b96757a12f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load normalized actions.  <br /></td></tr>
 <tr class="separator:a47c7da780acfed1ff91d4b96757a12f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a494013b6d4e0e0a8cbea1fb0dcde69" id="r_a2a494013b6d4e0e0a8cbea1fb0dcde69"><td class="memItemLeft" align="right" valign="top">torch.tensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a494013b6d4e0e0a8cbea1fb0dcde69">load_robot_positions</a> (str path)</td></tr>
+<tr class="memdesc:a2a494013b6d4e0e0a8cbea1fb0dcde69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load robot positions.  <br /></td></tr>
 <tr class="separator:a2a494013b6d4e0e0a8cbea1fb0dcde69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234e23ee92054b3cc15a2128f4e11da5" id="r_a234e23ee92054b3cc15a2128f4e11da5"><td class="memItemLeft" align="right" valign="top">torch.tensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a234e23ee92054b3cc15a2128f4e11da5">load_edge_weights</a> (str path)</td></tr>
 <tr class="memdesc:a234e23ee92054b3cc15a2128f4e11da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load edge weights.  <br /></td></tr>
@@ -153,7 +154,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to provide utility functions to load tensors and configuration files. </p>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00039">39</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00033">33</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a47c7da780acfed1ff91d4b96757a12f1" name="a47c7da780acfed1ff91d4b96757a12f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47c7da780acfed1ff91d4b96757a12f1">&#9670;&#160;</a></span>load_actions()</h2>
@@ -197,7 +198,7 @@ actions_mean Mean of the actions </dd>
 <dd>
 actions_std Standard deviation of the actions </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00116">116</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00128">128</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>
@@ -237,7 +238,7 @@ actions_std Standard deviation of the actions </dd></dl>
 <dd>
 edge_weights The loaded edge weights </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00154">154</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00168">168</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>
@@ -288,7 +289,7 @@ features_mean Mean of the features </dd>
 <dd>
 features_std Standard deviation of the features </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00090">90</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00086">86</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>
@@ -335,7 +336,7 @@ features_std Standard deviation of the features </dd></dl>
 <dd>
 maps The loaded maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00057">57</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00052">52</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>
@@ -362,7 +363,20 @@ maps The loaded maps </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00123">123</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p>Function to load robot positions. </p>
+<pre class="fragment">   The robot positions are stored as tensors in the following format:
+   - {path}/robot_positions.pt: Robot positions
+</pre><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path to the directory containing the robot positions</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd>
+<dd>
+robot_positions The loaded robot positions </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00149">149</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>
@@ -419,7 +433,7 @@ data The edge weight tensor </dd>
 <dd>
 data The position tensor (if pos is not None) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00177">177</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__loader__utils_8py_source.html#l00192">192</a> of file <a class="el" href="data__loader__utils_8py_source.html">data_loader_utils.py</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['mapbounds_0',['MapBounds',['../structCoverageControl_1_1MapUtils_1_1MapBounds.html',1,'CoverageControl::MapUtils']]],
-  ['multitrainmodel_1',['MultiTrainModel',['../classcoverage__control_1_1nn_1_1trainers_1_1multi__trainer_1_1MultiTrainModel.html',1,'coverage_control::nn::trainers::multi_trainer']]]
+  ['localmapcnndataset_0',['LocalMapCNNDataset',['../classcoverage__control_1_1nn_1_1data__loaders_1_1loaders_1_1LocalMapCNNDataset.html',1,'coverage_control::nn::data_loaders::loaders']]],
+  ['localmapgnndataset_1',['LocalMapGNNDataset',['../classcoverage__control_1_1nn_1_1data__loaders_1_1loaders_1_1LocalMapGNNDataset.html',1,'coverage_control::nn::data_loaders::loaders']]],
+  ['lpac_2',['LPAC',['../classcoverage__control_1_1nn_1_1models_1_1lpac_1_1LPAC.html',1,'coverage_control::nn::models::lpac']]]
 ];

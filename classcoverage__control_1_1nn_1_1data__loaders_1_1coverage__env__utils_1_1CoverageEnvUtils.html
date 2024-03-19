@@ -157,8 +157,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab4582f3a484c201985b54981afb230f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get robot positions.  <br /></td></tr>
 <tr class="separator:ab4582f3a484c201985b54981afb230f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12fcf93bdc2c68412a3d6dc78bf07de1" id="r_a12fcf93bdc2c68412a3d6dc78bf07de1"><td class="memItemLeft" align="right" valign="top">torch.Tensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12fcf93bdc2c68412a3d6dc78bf07de1">get_weights</a> (CoverageSystem env, Parameters params)</td></tr>
+<tr class="memdesc:a12fcf93bdc2c68412a3d6dc78bf07de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get edge weights for the communication graph.  <br /></td></tr>
 <tr class="separator:a12fcf93bdc2c68412a3d6dc78bf07de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23222303885f27132ef43e0a79721db5" id="r_a23222303885f27132ef43e0a79721db5"><td class="memItemLeft" align="right" valign="top">torch.Tensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23222303885f27132ef43e0a79721db5">robot_positions_to_edge_weights</a> (PointVector robot_positions, int world_map_size, float comm_range)</td></tr>
+<tr class="memdesc:a23222303885f27132ef43e0a79721db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert robot positions to edge weights.  <br /></td></tr>
 <tr class="separator:a23222303885f27132ef43e0a79721db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a951147b558268648ccd2e10ebd0f4c40" id="r_a951147b558268648ccd2e10ebd0f4c40"><td class="memItemLeft" align="right" valign="top">torch_geometric.data.Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a951147b558268648ccd2e10ebd0f4c40">get_torch_geometric_data</a> (CoverageSystem env, Parameters params, bool use_cnn, bool use_comm_map, int map_size)</td></tr>
 <tr class="memdesc:a951147b558268648ccd2e10ebd0f4c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get torch geometric data In this function, the edge weights are binary.  <br /></td></tr>
@@ -167,7 +169,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for utility functions for coverage environment. </p>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00044">44</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00046">46</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7e423aa14abaac41f7d3fe44b4818f3d" name="a7e423aa14abaac41f7d3fe44b4818f3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e423aa14abaac41f7d3fe44b4818f3d">&#9670;&#160;</a></span>get_communication_maps()</h2>
@@ -191,7 +193,8 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>map_size</em></span>&#160;)</td>
+          <td class="paramtype">int
+    </td>          <td class="paramname"><span class="paramname"><em>map_size</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -218,7 +221,7 @@ Static Public Member Functions</h2></td></tr>
 <dd>
 torch communication maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00141">141</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00163">163</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -273,7 +276,7 @@ torch communication maps </dd></dl>
 <dd>
 torch maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00201">201</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00244">244</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -316,7 +319,7 @@ torch maps </dd></dl>
 <dd>
 torch raw local maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00100">100</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00112">112</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -359,7 +362,7 @@ torch raw local maps </dd></dl>
 <dd>
 torch raw obstacle maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00118">118</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00134">134</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -397,7 +400,7 @@ torch raw obstacle maps </dd></dl>
 <dd>
 torch robot positions </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00242">242</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00309">309</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -458,7 +461,7 @@ torch robot positions </dd></dl>
 <dd>
 torch_geometric torch geometric data </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00285">285</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00381">381</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -496,7 +499,7 @@ torch_geometric torch geometric data </dd></dl>
 <dd>
 torch voronoi features </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00225">225</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00290">290</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -527,7 +530,19 @@ torch voronoi features </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00247">247</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p>Get edge weights for the communication graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>coverage environment </td></tr>
+    <tr><td class="paramname">params</td><td>parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd>
+<dd>
+torch edge weights </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00325">325</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -570,7 +585,7 @@ torch voronoi features </dd></dl>
 <dd>
 torch resized maps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00180">180</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00217">217</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -596,7 +611,8 @@ torch resized maps </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>comm_range</em></span>&#160;)</td>
+          <td class="paramtype">float
+    </td>          <td class="paramname"><span class="paramname"><em>comm_range</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -606,7 +622,20 @@ torch resized maps </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00260">260</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p>Convert robot positions to edge weights. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_positions</td><td>robot positions </td></tr>
+    <tr><td class="paramname">world_map_size</td><td>size of the world map </td></tr>
+    <tr><td class="paramname">comm_range</td><td>communication range</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd>
+<dd>
+torch edge weights </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00353">353</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>
@@ -655,7 +684,7 @@ torch converted data</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00067">67</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="coverage__env__utils_8py_source.html#l00070">70</a> of file <a class="el" href="coverage__env__utils_8py_source.html">coverage_env_utils.py</a>.</p>
 
 </div>
 </div>

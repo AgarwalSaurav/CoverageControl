@@ -123,7 +123,7 @@ $(function(){initNavTree('classcoverage__control_1_1io__utils_1_1IOUtils.html','
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classcoverage__control_1_1io__utils_1_1IOUtils-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">IOUtils Class Reference</div></div>
+  <div class="headertitle"><div class="title">IOUtils Class Reference<div class="ingroups"><a class="el" href="group__python__api.html">Python API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -133,6 +133,7 @@ $(function(){initNavTree('classcoverage__control_1_1io__utils_1_1IOUtils.html','
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a6a5f6a5a34351cc7c5163191b8da1507" id="r_a6a5f6a5a34351cc7c5163191b8da1507"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a5f6a5a34351cc7c5163191b8da1507">sanitize_path</a> (str path_str)</td></tr>
+<tr class="memdesc:a6a5f6a5a34351cc7c5163191b8da1507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to sanitize a path string.  <br /></td></tr>
 <tr class="separator:a6a5f6a5a34351cc7c5163191b8da1507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23fc5dff2cfdedf61f46ebdc250cd718" id="r_a23fc5dff2cfdedf61f46ebdc250cd718"><td class="memItemLeft" align="right" valign="top">torch.tensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23fc5dff2cfdedf61f46ebdc250cd718">load_tensor</a> (str path)</td></tr>
 <tr class="memdesc:a23fc5dff2cfdedf61f46ebdc250cd718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load a tensor from a file Can load tensors from jit script format files.  <br /></td></tr>
@@ -141,6 +142,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa1dae1644955aba741a1ceb070000ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load a yaml file.  <br /></td></tr>
 <tr class="separator:aa1dae1644955aba741a1ceb070000ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eebe56821ae4cd3c500c6d170a2ace5" id="r_a7eebe56821ae4cd3c500c6d170a2ace5"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7eebe56821ae4cd3c500c6d170a2ace5">load_toml</a> (str path)</td></tr>
+<tr class="memdesc:a7eebe56821ae4cd3c500c6d170a2ace5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load a toml file.  <br /></td></tr>
 <tr class="separator:a7eebe56821ae4cd3c500c6d170a2ace5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -149,7 +151,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">- load_yaml</div>
 <div class="line">- load_toml</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00039">39</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00049">49</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a23fc5dff2cfdedf61f46ebdc250cd718" name="a23fc5dff2cfdedf61f46ebdc250cd718"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23fc5dff2cfdedf61f46ebdc250cd718">&#9670;&#160;</a></span>load_tensor()</h2>
@@ -193,7 +195,7 @@ None If the file does not exist</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00060">60</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00074">74</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
 
 </div>
 </div>
@@ -220,7 +222,9 @@ None If the file does not exist</dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00099">99</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
+<p>Function to load a toml file. </p>
+
+<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00121">121</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
 
 </div>
 </div>
@@ -264,7 +268,7 @@ data The loaded data</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00087">87</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00104">104</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
 
 </div>
 </div>
@@ -291,7 +295,9 @@ data The loaded data</dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00042">42</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
+<p>Function to sanitize a path string. </p>
+
+<p class="definition">Definition at line <a class="el" href="io__utils_8py_source.html#l00055">55</a> of file <a class="el" href="io__utils_8py_source.html">io_utils.py</a>.</p>
 
 </div>
 </div>
