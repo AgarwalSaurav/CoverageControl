@@ -1,7 +1,11 @@
 name: docker-deploy
 on:
+  workflow_dispatch:
   release:
     types: [published]
+
+env:
+  FORCE_COLOR: 3
 
 jobs:
   docker-deploy:
