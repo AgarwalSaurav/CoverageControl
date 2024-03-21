@@ -52,7 +52,9 @@ jobs:
 
   upload_all:
     needs: [build_wheels, make_sdist]
-    environment: pypi
+    environment:
+      name: pypi
+      url: https://pypi.org/p/coverage-control
     permissions:
       id-token: write
     runs-on: ubuntu-latest
@@ -66,7 +68,7 @@ jobs:
           merge-multiple: true
 
       - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
+        # with:
           # Remember to tell (test-)pypi about this repo before publishing
           # Remove this line to publish to PyPI
-          repository-url: https://test.pypi.org/legacy/
+          # repository-url: https://test.pypi.org/legacy/
