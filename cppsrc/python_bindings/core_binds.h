@@ -311,6 +311,7 @@ void pyCoverageControl_core_coverage_system(py::module &m) {
       .def("GetCommunicationMaps", &CoverageSystem::GetCommunicationMaps)
       .def("GetRobotsInCommunication",
            &CoverageSystem::GetRobotsInCommunication)
+      .def("GetAdjacencyMatrix", &CoverageSystem::GetAdjacencyMatrix)
       .def("ComputeVoronoiCells", &CoverageSystem::ComputeVoronoiCells,
            py::return_value_policy::reference_internal)
       .def("GetVoronoiCells", &CoverageSystem::GetVoronoiCells,

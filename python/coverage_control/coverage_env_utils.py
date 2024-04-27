@@ -323,14 +323,16 @@ class CoverageEnvUtils:
         Returns:
             torch.Tensor: edge weights
         """
-        onebyexp = 1.0 / math.exp(1.0)
-        robot_positions = CoverageEnvUtils.to_tensor(env.GetRobotPositions())
-        pairwise_distances = torch.cdist(robot_positions, robot_positions, 2)
-        edge_weights = torch.exp(
-            -(pairwise_distances.square())
-            / (params.pCommunicationRange * params.pCommunicationRange)
-        )
-        edge_weights.masked_fill_(edge_weights < onebyexp, 0)
+        # onebyexp = 1.0 / math.exp(1.0)
+        # robot_positions = CoverageEnvUtils.to_tensor(env.GetRobotPositions())
+        # pairwise_distances = torch.cdist(robot_positions, robot_positions, 2)
+        # edge_weights = torch.exp(
+        #     -(pairwise_distances.square())
+        #     / (params.pCommunicationRange * params.pCommunicationRange)
+        # )
+        # edge_weights.masked_fill_(edge_weights < onebyexp, 0)
+        # edge_weights.fill_diagonal_(0)
+        edge_weights = torch.tensor(env.GetAdjacencyMatrix(), dtype=torch.float32)
         edge_weights.fill_diagonal_(0)
 
         return edge_weights

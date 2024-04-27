@@ -192,6 +192,7 @@ void CoverageSystem::InitSetup() {
 
   voronoi_cells_.resize(num_robots_);
   InitializeMapNormalizers();
+  adjacency_matrix_ = MapType::Identity(num_robots_, num_robots_);
 
   robot_global_positions_.resize(num_robots_);
   for (size_t iRobot = 0; iRobot < num_robots_; ++iRobot) {
@@ -265,11 +266,14 @@ void CoverageSystem::UpdateNeighbors() {
     relative_positions_neighbors_[iRobot].clear();
     neighbor_ids_[iRobot].clear();
   }
+  adjacency_matrix_.setIdentity();
   for (size_t iRobot = 0; iRobot < num_robots_; ++iRobot) {
     for (size_t jRobot = iRobot + 1; jRobot < num_robots_; ++jRobot) {
       Point2 relative_pos =
           robot_global_positions_[jRobot] - robot_global_positions_[iRobot];
       if (relative_pos.norm() < params_.pCommunicationRange) {
+        adjacency_matrix_(iRobot, jRobot) = 1;
+        adjacency_matrix_(jRobot, iRobot) = 1;
         relative_positions_neighbors_[iRobot].push_back(relative_pos);
         neighbor_ids_[iRobot].push_back(jRobot);
         relative_positions_neighbors_[jRobot].push_back(-relative_pos);

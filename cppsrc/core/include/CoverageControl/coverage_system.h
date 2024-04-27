@@ -103,6 +103,8 @@ class CoverageSystem {
   MapType normalization_matrix_y_;
   MapType normalization_matrix_dist_;
 
+  MapType adjacency_matrix_;  //!< Adjacency matrix for communication
+
   float cell_size_ = 0;  //!< Cell size for the normalization matrices
 
   //! Initialize the member variables
@@ -137,23 +139,25 @@ class CoverageSystem {
      * exploration_map_.sum()) << std::endl; */
   }
 
-void InitializeMapNormalizers() {
-  int map_size = params_.pFeatureMapSize;
-  float mid = static_cast<float>(map_size) / 2.0;
-  Eigen::ArrayXf vals1 = Eigen::ArrayXf::LinSpaced(
-      mid + 1, -params_.pCommunicationRange, 0)(Eigen::seq(1, mid));
-  Eigen::ArrayXf vals2 = Eigen::ArrayXf::LinSpaced(
-      mid + 1, 0, params_.pCommunicationRange)(Eigen::seq(0, mid - 1));
-  Eigen::ArrayXf final_vals(map_size);
-  final_vals << vals1, vals2;
+  void InitializeMapNormalizers() {
+    int map_size = params_.pFeatureMapSize;
+    float mid = static_cast<float>(map_size) / 2.0;
+    Eigen::ArrayXf vals1 = Eigen::ArrayXf::LinSpaced(
+        mid + 1, -params_.pCommunicationRange, 0)(Eigen::seq(1, mid));
+    Eigen::ArrayXf vals2 = Eigen::ArrayXf::LinSpaced(
+        mid + 1, 0, params_.pCommunicationRange)(Eigen::seq(0, mid - 1));
+    Eigen::ArrayXf final_vals(map_size);
+    final_vals << vals1, vals2;
 
-  normalization_matrix_x_ = final_vals.replicate(1, map_size);
-  normalization_matrix_y_ = final_vals.transpose().replicate(map_size, 1);
-  normalization_matrix_dist_ = (normalization_matrix_x_.array().square() +
-                                normalization_matrix_y_.array().square()).sqrt();
+    normalization_matrix_x_ = final_vals.replicate(1, map_size);
+    normalization_matrix_y_ = final_vals.transpose().replicate(map_size, 1);
+    normalization_matrix_dist_ = (normalization_matrix_x_.array().square() +
+                                  normalization_matrix_y_.array().square())
+                                     .sqrt();
 
-  cell_size_ = 2.0 * static_cast<float>(params_.pCommunicationRange) / map_size;
-}
+    cell_size_ =
+        2.0 * static_cast<float>(params_.pCommunicationRange) / map_size;
+  }
 
   //! Execute updates after a step for robot_id (avoid using this function, use
   //! PostStepCommands() instead).
@@ -165,7 +169,7 @@ void InitializeMapNormalizers() {
   void PostStepCommands();
 
   //! Compute the adjacency matrix for communication
-  void ComputeAdjacencyMatrix();
+  /* void ComputeAdjacencyMatrix(); */
 
   //! Update the positions of all robots from the RobotModel objects
   void UpdateRobotPositions() {
@@ -510,6 +514,8 @@ void InitializeMapNormalizers() {
   std::vector<int> GetNeighborIDs(size_t const robot_id) const {
     return neighbor_ids_[robot_id];
   }
+
+  MapType GetAdjacencyMatrix() const { return adjacency_matrix_; }
 
   /*!
    * \brief Get the global positions of all robots
