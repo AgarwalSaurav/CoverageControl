@@ -96,11 +96,11 @@ void Parameters::ParseParameters() {
     auto toml_WorldMapSize = toml_EnvironmentMaps["WorldMapSize"].value<int>();
     auto toml_RobotMapSize = toml_EnvironmentMaps["RobotMapSize"].value<int>();
     auto toml_LocalMapSize = toml_EnvironmentMaps["LocalMapSize"].value<int>();
+    auto toml_FeatureMapSize = toml_EnvironmentMaps["FeatureMapSize"].value<int>();
 
     if (toml_Resolution) {
       pResolution = toml_Resolution.value();
     }
-
     if (toml_WorldMapSize) {
       pWorldMapSize = toml_WorldMapSize.value();
     }
@@ -109,6 +109,9 @@ void Parameters::ParseParameters() {
     }
     if (toml_LocalMapSize) {
       pLocalMapSize = toml_LocalMapSize.value();
+    }
+    if (toml_FeatureMapSize) {
+      pFeatureMapSize = toml_FeatureMapSize.value();
     }
 
     auto toml_EnvironmentMapsUpdateSettings =

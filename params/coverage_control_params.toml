@@ -30,6 +30,9 @@ RobotMapSize = 1024
 # Should be greater than CommunicationRange so that they can form different channels of the same image.
 LocalMapSize = 256
 
+# Feature map is used as input to the neural network (aka cnn_map_size)
+FeatureMapSize = 32
+
 # Map update settings
 [Environment.Maps.UpdateSettings]
 

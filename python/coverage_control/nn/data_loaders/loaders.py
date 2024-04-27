@@ -118,11 +118,11 @@ class CNNGNNDataset(Dataset):
         self.robot_positions = (self.robot_positions + world_size / 2) / world_size
 
         # Print the details of the dataset with device information
-        print(f"Dataset: {self.stage} | Size: {self.dataset_size}",
-              f"Coverage Maps: {self.maps.shape}",
-              f"Targets: {self.targets.shape}",
-              f"Robot Positions: {self.robot_positions.shape}",
-              f"Edge Weights: {self.edge_weights.shape}",
+        print(f"Dataset: {self.stage} | Size: {self.dataset_size}\n"
+              f"Coverage Maps: {self.maps.shape}\n"
+              f"Targets: {self.targets.shape}\n"
+              f"Robot Positions: {self.robot_positions.shape}\n"
+              f"Edge Weights: {self.edge_weights.shape}\n"
               )
 
     def len(self):

@@ -146,10 +146,13 @@ CoverageSystem::CoverageSystem(
 }
 
 void CoverageSystem::GetRobotCommunicationMaps(
-    size_t const id, size_t map_size, MapType &communication_map_x,
+    size_t const id, size_t const map_size, MapType &communication_map_x,
     MapType &communication_map_y) const {
   communication_map_x = MapType::Zero(map_size, map_size);
   communication_map_y = MapType::Zero(map_size, map_size);
+  Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> count_for_mean =
+      Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic>::Zero(map_size,
+                                                               map_size);
   PointVector robot_neighbors_pos = GetRelativePositonsNeighbors(id);
   double center = map_size / 2. - params_.pResolution / 2.;
   Point2 center_point(center, center);
@@ -157,15 +160,30 @@ void CoverageSystem::GetRobotCommunicationMaps(
       map_size / (params_.pCommunicationRange * params_.pResolution * 2.);
   for (Point2 const &relative_pos : robot_neighbors_pos) {
     Point2 scaled_indices_val = relative_pos * scale + center_point;
-    int scaled_indices_x = std::round(scaled_indices_val[0]);
-    int scaled_indices_y = std::round(scaled_indices_val[1]);
-    Point2 normalized_relative_pos = relative_pos / params_.pCommunicationRange;
+    int x = std::round(scaled_indices_val[0]);
+    int y = std::round(scaled_indices_val[1]);
+    int count = count_for_mean(x, y);
 
-    communication_map_x(scaled_indices_x, scaled_indices_y) +=
-        normalized_relative_pos[0];
-    communication_map_y(scaled_indices_x, scaled_indices_y) +=
-        normalized_relative_pos[1];
+    communication_map_x(x, y) =
+        (communication_map_x(x, y) * count + relative_pos[0]) / (count + 1);
+    communication_map_y(x, y) =
+        (communication_map_y(x, y) * count + relative_pos[1]) / (count + 1);
+    count_for_mean(x, y) += 1;
   }
+
+  MapType sign_x = communication_map_x.array().sign();
+  MapType sign_y = communication_map_y.array().sign();
+
+  communication_map_x =
+      ((communication_map_x - normalization_matrix_x_) / cell_size_)
+          .cwiseProduct(sign_x);
+  communication_map_y =
+      ((communication_map_y - normalization_matrix_y_) / cell_size_)
+          .cwiseProduct(sign_y);
+  communication_map_x =
+      (communication_map_x.array() == -0).select(0, communication_map_x);
+  communication_map_y =
+      (communication_map_y.array() == -0).select(0, communication_map_y);
 }
 
 void CoverageSystem::InitSetup() {
@@ -173,6 +191,7 @@ void CoverageSystem::InitSetup() {
   robot_positions_history_.resize(num_robots_);
 
   voronoi_cells_.resize(num_robots_);
+  InitializeMapNormalizers();
 
   robot_global_positions_.resize(num_robots_);
   for (size_t iRobot = 0; iRobot < num_robots_; ++iRobot) {

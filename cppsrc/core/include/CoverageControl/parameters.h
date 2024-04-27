@@ -90,6 +90,9 @@ class Parameters {
   //! different channels of the same image.
   int pLocalMapSize = 256;
 
+  //! Feature map for neural network
+  int pFeatureMapSize = 32;
+
   bool pUpdateRobotMap = true;
   bool pUpdateExplorationMap = true;
   bool pUpdateSensorView = true;
