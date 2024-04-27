@@ -145,28 +145,27 @@ CoverageSystem::CoverageSystem(
   InitSetup();
 }
 
-std::pair<MapType, MapType> CoverageSystem::GetRobotCommunicationMaps(
-    size_t const id, size_t map_size) {
-  std::pair<MapType, MapType> communication_maps = std::make_pair(
-      MapType::Zero(map_size, map_size), MapType::Zero(map_size, map_size));
+void CoverageSystem::GetRobotCommunicationMaps(
+    size_t const id, size_t map_size, MapType &communication_map_x,
+    MapType &communication_map_y) const {
+  communication_map_x = MapType::Zero(map_size, map_size);
+  communication_map_y = MapType::Zero(map_size, map_size);
   PointVector robot_neighbors_pos = GetRelativePositonsNeighbors(id);
   double center = map_size / 2. - params_.pResolution / 2.;
   Point2 center_point(center, center);
+  double scale =
+      map_size / (params_.pCommunicationRange * params_.pResolution * 2.);
   for (Point2 const &relative_pos : robot_neighbors_pos) {
-    Point2 scaled_indices_val =
-        relative_pos * map_size /
-            (params_.pCommunicationRange * params_.pResolution * 2.) +
-        center_point;
+    Point2 scaled_indices_val = relative_pos * scale + center_point;
     int scaled_indices_x = std::round(scaled_indices_val[0]);
     int scaled_indices_y = std::round(scaled_indices_val[1]);
     Point2 normalized_relative_pos = relative_pos / params_.pCommunicationRange;
 
-    communication_maps.first(scaled_indices_x, scaled_indices_y) +=
+    communication_map_x(scaled_indices_x, scaled_indices_y) +=
         normalized_relative_pos[0];
-    communication_maps.second(scaled_indices_x, scaled_indices_y) +=
+    communication_map_y(scaled_indices_x, scaled_indices_y) +=
         normalized_relative_pos[1];
   }
-  return communication_maps;
 }
 
 void CoverageSystem::InitSetup() {
@@ -587,21 +586,26 @@ void CoverageSystem::PlotRobotCommunicationMaps(std::string const &dir_name,
                                                 int const &robot_id,
                                                 int const &step,
                                                 size_t const &map_size) {
-  auto robot_communication_maps = GetRobotCommunicationMaps(robot_id, map_size);
+  MapType communication_map_x;
+  MapType communication_map_y;
+  GetRobotCommunicationMaps(robot_id, map_size, communication_map_x,
+                            communication_map_y);
+  /* auto robot_communication_maps = GetRobotCommunicationMaps(robot_id,
+   * map_size); */
   Plotter plotter_x(dir_name, map_size * params_.pResolution,
                     params_.pResolution);
   plotter_x.SetPlotName(
       "robot_communication_map_x_" + std::to_string(robot_id) + "_", step);
-  plotter_x.PlotMap(robot_communication_maps.first);
+  plotter_x.PlotMap(communication_map_x);
   Plotter plotter_y(dir_name, map_size * params_.pResolution,
                     params_.pResolution);
   plotter_y.SetPlotName(
       "robot_communication_map_y_" + std::to_string(robot_id) + "_", step);
-  plotter_y.PlotMap(robot_communication_maps.second);
+  plotter_y.PlotMap(communication_map_y);
 }
 
 PointVector CoverageSystem::GetRelativePositonsNeighbors(
-    size_t const robot_id) {
+    size_t const robot_id) const {
   if (params_.pAddNoisePositions) {
     PointVector noisy_positions = GetRobotPositions();
     for (Point2 &pt : noisy_positions) {

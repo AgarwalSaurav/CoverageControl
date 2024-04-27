@@ -66,10 +66,10 @@ namespace CoverageControl {
  * library.
  */
 class CoverageSystem {
-  Parameters const params_;         //!< Parameters for the coverage system
-  WorldIDF world_idf_;              //!< World IDF
-  size_t num_robots_ = 0;           //!< Number of robots
-  std::vector<RobotModel> robots_;  //!< Vector of robots of type RobotModel
+  Parameters const params_;          //!< Parameters for the coverage system
+  WorldIDF world_idf_;               //!< World IDF
+  size_t num_robots_ = 0;            //!< Number of robots
+  std::vector<RobotModel> robots_;   //!< Vector of robots of type RobotModel
   double normalization_factor_ = 0;  //!< Normalization factor for the world IDF
   Voronoi voronoi_;                  //!< Voronoi object
   std::vector<VoronoiCell> voronoi_cells_;  //!< Voronoi cells for each robot
@@ -482,7 +482,7 @@ class CoverageSystem {
     return weighted_exploration_ratio;
   }
 
-  PointVector GetRelativePositonsNeighbors(size_t const robot_id);
+  PointVector GetRelativePositonsNeighbors(size_t const robot_id) const;
   std::vector<int> GetNeighborIDs(size_t const robot_id) const {
     return neighbor_ids_[robot_id];
   }
@@ -494,8 +494,8 @@ class CoverageSystem {
    * \param force_no_noise If true, returns the positions without noise
    * \return Vector of global positions of all robots
    */
-  PointVector GetRobotPositions(bool force_no_noise = false) {
-    UpdateRobotPositions();
+  PointVector GetRobotPositions(bool force_no_noise = false) const {
+    /* UpdateRobotPositions(); */
     if (params_.pAddNoisePositions and not force_no_noise) {
       PointVector noisy_robot_global_positions;
       for (Point2 pt : robot_global_positions_) {
@@ -565,15 +565,18 @@ class CoverageSystem {
     return robot_neighbors_pos;
   }
 
-  std::pair<MapType, MapType> GetRobotCommunicationMaps(size_t const, size_t);
+  void GetRobotCommunicationMaps(size_t const, size_t, MapType &,
+                                 MapType &) const;
 
   std::vector<MapType> GetCommunicationMaps(size_t map_size) {
     std::vector<MapType> communication_maps(2 * num_robots_);
-/* #pragma omp parallel for num_threads(num_robots_) */
+#pragma omp parallel for num_threads(num_robots_)
     for (size_t i = 0; i < num_robots_; ++i) {
-      auto comm_map = GetRobotCommunicationMaps(i, map_size);
-      communication_maps[2 * i] = comm_map.first;
-      communication_maps[2 * i + 1] = comm_map.second;
+      MapType comm_map0;
+      MapType comm_map1;
+      GetRobotCommunicationMaps(i, map_size, comm_map0, comm_map1);
+      communication_maps[2 * i] = comm_map0;
+      communication_maps[2 * i + 1] = comm_map1;
     }
     return communication_maps;
   }
