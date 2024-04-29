@@ -150,16 +150,15 @@ void CoverageSystem::GetRobotCommunicationMaps(
     MapType &communication_map_y) const {
   communication_map_x = MapType::Zero(map_size, map_size);
   communication_map_y = MapType::Zero(map_size, map_size);
-  Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> count_for_mean =
-      Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic>::Zero(map_size,
-                                                               map_size);
+  MapType count_for_mean = MapType::Zero(map_size, map_size);
   PointVector robot_neighbors_pos = GetRelativePositonsNeighbors(id);
-  double center = map_size / 2. - params_.pResolution / 2.;
+  double map_size_d = static_cast<double>(map_size);
+  double center = map_size_d / 2. - params_.pResolution / 2.;
   Point2 center_point(center, center);
-  double scale =
-      map_size / (params_.pCommunicationRange * params_.pResolution * 2.);
+  double scale_factor =
+      map_size_d / (params_.pCommunicationRange * params_.pResolution * 2.);
   for (Point2 const &relative_pos : robot_neighbors_pos) {
-    Point2 scaled_indices_val = relative_pos * scale + center_point;
+    Point2 scaled_indices_val = center_point + relative_pos * scale_factor;
     int x = std::round(scaled_indices_val[0]);
     int y = std::round(scaled_indices_val[1]);
     int count = count_for_mean(x, y);

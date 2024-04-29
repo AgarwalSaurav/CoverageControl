@@ -105,7 +105,7 @@ class CoverageSystem {
 
   MapType adjacency_matrix_;  //!< Adjacency matrix for communication
 
-  float cell_size_ = 0;  //!< Cell size for the normalization matrices
+  double cell_size_ = 0;  //!< Cell size for the normalization matrices
 
   //! Initialize the member variables
   void InitSetup();
@@ -141,7 +141,7 @@ class CoverageSystem {
 
   void InitializeMapNormalizers() {
     int map_size = params_.pFeatureMapSize;
-    float mid = static_cast<float>(map_size) / 2.0;
+    double mid = static_cast<double>(map_size) / 2.0;
     Eigen::ArrayXf vals1 = Eigen::ArrayXf::LinSpaced(
         mid + 1, -params_.pCommunicationRange, 0)(Eigen::seq(1, mid));
     Eigen::ArrayXf vals2 = Eigen::ArrayXf::LinSpaced(
@@ -156,7 +156,7 @@ class CoverageSystem {
                                      .sqrt();
 
     cell_size_ =
-        2.0 * static_cast<float>(params_.pCommunicationRange) / map_size;
+        2.0 * static_cast<double>(params_.pCommunicationRange) / map_size;
   }
 
   //! Execute updates after a step for robot_id (avoid using this function, use
