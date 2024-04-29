@@ -119,7 +119,11 @@ class ControllerNN:
                     )
             self.learning_params = IOUtils.load_toml(self.learning_params_file)
             self.model = cc_nn.LPAC(self.learning_params).to(self.device)
-            self.model.load_model(IOUtils.sanitize_path(self.config["ModelStateDict"]))
+            # self.model.load_model(IOUtils.sanitize_path(self.config["ModelStateDict"]))
+            self.model.load_compiled_state_dict(
+                    IOUtils.sanitize_path(self.config["ModelStateDict"])
+                    )
+
 
         self.actions_mean = self.model.actions_mean.to(self.device)
         self.actions_std = self.model.actions_std.to(self.device)

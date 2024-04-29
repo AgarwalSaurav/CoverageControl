@@ -80,6 +80,14 @@ class LPAC(torch.nn.Module, GNNConfigParser):
         x = self.output_linear(self.gnn_mlp(self.gnn_backbone(gnn_backbone_in, edge_index)))
         return x
 
+    def load_compiled_state_dict(self, model_state_dict_path: str) -> None:
+        # remove _orig_mod from the state dict keys
+        state_dict = torch.load(model_state_dict_path)
+        new_state_dict = {}
+        for key in state_dict.keys():
+            new_state_dict[key.replace("_orig_mod.", "")] = state_dict[key]
+        self.load_state_dict(new_state_dict, strict=True)
+
     def load_model(self, model_state_dict_path: str) -> None:
         """
         Load the model from the state dict

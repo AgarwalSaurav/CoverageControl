@@ -11,6 +11,8 @@ from coverage_control import WorldIDF
 from coverage_control.algorithms import ControllerCVT
 from coverage_control.algorithms import ControllerNN
 
+import torch
+torch.set_float32_matmul_precision('high')
 
 # @ingroup python_api
 class Evaluator:

@@ -273,12 +273,12 @@ class CoverageEnvUtils:
                 )
 
         if use_comm_map:
-            # comm_maps = CoverageEnvUtils.get_communication_maps_unnormalized(
-            #         env, params, resized_map_size
-            #         )
-            comm_maps = CoverageEnvUtils.get_communication_maps(
+            comm_maps = CoverageEnvUtils.get_communication_maps_unnormalized(
                     env, params, resized_map_size
                     )
+            # comm_maps = CoverageEnvUtils.get_communication_maps(
+            #         env, params, resized_map_size
+            #         )
             maps = torch.cat(
                     [
                         resized_local_maps.unsqueeze(1),
@@ -350,7 +350,7 @@ class CoverageEnvUtils:
         # edge_weights.masked_fill_(edge_weights < onebyexp, 0)
         # edge_weights.fill_diagonal_(0)
         edge_weights = torch.tensor(env.GetAdjacencyMatrix(), dtype=torch.float32)
-        # edge_weights.fill_diagonal_(0)
+        edge_weights.fill_diagonal_(0)
 
         return edge_weights
 

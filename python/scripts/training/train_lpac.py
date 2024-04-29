@@ -17,6 +17,7 @@ from coverage_control.nn import TrainModel
 
 # Set the device
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+torch.set_float32_matmul_precision('high')
 
 config_file = sys.argv[1]
 world_size = int(sys.argv[2])
