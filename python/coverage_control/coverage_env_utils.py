@@ -161,33 +161,35 @@ class CoverageEnvUtils:
         Returns:
             torch.Tensor: communication maps
         """
-        num_robots = env.GetNumRobots()
+        comm_maps = torch.tensor(numpy.array(env.GetCommunicationMaps(map_size)), dtype=torch.float32).reshape(env.GetNumRobots(), 2, map_size, map_size)
 
-        comm_maps = torch.zeros((num_robots, 2, map_size, map_size))
+        # num_robots = env.GetNumRobots()
 
-        for r_idx in range(num_robots):
-            neighbors_pos = CoverageEnvUtils.to_tensor(
-                env.GetRelativePositonsNeighbors(r_idx)
-            )
-            scaled_indices = torch.round(
-                neighbors_pos
-                * map_size
-                / (params.pCommunicationRange * params.pResolution * 2.0)
-                + (map_size / 2.0 - params.pResolution / 2.0)
-            )
-            # comm_range_mask = relative_dist[r_idx] < params.pCommunicationRange
-            # scaled_indices = scaled_relative_pos[r_idx][comm_range_mask]
-            indices = torch.transpose(scaled_indices, 1, 0)
-            indices = indices.long()
-            values = neighbors_pos / params.pCommunicationRange
-            # values = values / params.pCommunicationRange
-            # values = (values + params.pCommunicationRange) / (2. * params.pCommunicationRange)
-            comm_maps[r_idx][0] = torch.sparse_coo_tensor(
-                indices, values[:, 0], torch.Size([map_size, map_size])
-            ).to_dense()
-            comm_maps[r_idx][1] = torch.sparse_coo_tensor(
-                indices, values[:, 1], torch.Size([map_size, map_size])
-            ).to_dense()
+        # comm_maps = torch.zeros((num_robots, 2, map_size, map_size))
+
+        # for r_idx in range(num_robots):
+        #     neighbors_pos = CoverageEnvUtils.to_tensor(
+        #         env.GetRelativePositonsNeighbors(r_idx)
+        #     )
+        #     scaled_indices = torch.round(
+        #         neighbors_pos
+        #         * map_size
+        #         / (params.pCommunicationRange * params.pResolution * 2.0)
+        #         + (map_size / 2.0 - params.pResolution / 2.0)
+        #     )
+        #     # comm_range_mask = relative_dist[r_idx] < params.pCommunicationRange
+        #     # scaled_indices = scaled_relative_pos[r_idx][comm_range_mask]
+        #     indices = torch.transpose(scaled_indices, 1, 0)
+        #     indices = indices.long()
+        #     values = neighbors_pos / params.pCommunicationRange
+        #     # values = values / params.pCommunicationRange
+        #     # values = (values + params.pCommunicationRange) / (2. * params.pCommunicationRange)
+        #     comm_maps[r_idx][0] = torch.sparse_coo_tensor(
+        #         indices, values[:, 0], torch.Size([map_size, map_size])
+        #     ).to_dense()
+        #     comm_maps[r_idx][1] = torch.sparse_coo_tensor(
+        #         indices, values[:, 1], torch.Size([map_size, map_size])
+        #     ).to_dense()
 
         return comm_maps
         # positions = env.GetRobotPositions()
