@@ -236,6 +236,18 @@ class CoverageSystem {
     PostStepCommands(robot_id);
   }
 
+  //! Set the global positions of all robots
+  void SetGlobalRobotPositions(PointVector const &global_positions) {
+    if (global_positions.size() != num_robots_) {
+      throw std::length_error{
+          "The size of the positions don't match with the number of robots"};
+    }
+    for (size_t i = 0; i < num_robots_; ++i) {
+      robots_[i].SetGlobalRobotPosition(global_positions[i]);
+    }
+    PostStepCommands();
+  }
+
   //! Set the positions of all robots with respect to their current positions
   //! \note Same as SetLocalRobotPositions
   void SetRobotPositions(std::vector<Point2> const &positions) {
@@ -522,6 +534,11 @@ class CoverageSystem {
   const MapType &GetRobotLocalMap(size_t const id) {
     CheckRobotID(id);
     return robots_[id].GetRobotLocalMap();
+  }
+
+  MapType &GetRobotLocalMapMutable(size_t const id) {
+    CheckRobotID(id);
+    return robots_[id].GetRobotLocalMapMutable();
   }
 
   const MapType &GetRobotMap(size_t const id) const {

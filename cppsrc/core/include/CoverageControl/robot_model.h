@@ -283,9 +283,7 @@ class RobotModel {
     return system_map_;
   }
 
-  const MapType &GetRobotLocalMap() {
-    /* local_map_ = MapType::Constant(params_.pLocalMapSize,
-     * params_.pLocalMapSize, -1.0); */
+  void ComputeLocalMap() {
     local_map_ =
         MapType::Constant(params_.pLocalMapSize, params_.pLocalMapSize, 0.);
     if (not MapUtils::IsPointOutsideBoundary(
@@ -295,6 +293,17 @@ class RobotModel {
                           params_.pRobotMapSize, robot_map_,
                           params_.pLocalMapSize, local_map_);
     }
+  }
+
+  MapType &GetRobotLocalMapMutable() {
+    ComputeLocalMap();
+    return local_map_;
+  }
+
+  const MapType &GetRobotLocalMap() {
+    /* local_map_ = MapType::Constant(params_.pLocalMapSize,
+     * params_.pLocalMapSize, -1.0); */
+    ComputeLocalMap();
     return local_map_;
   }
 
