@@ -474,6 +474,7 @@ class CoverageSystem {
   const MapType &GetSystemMap() const { return system_map_; }
   const MapType &GetSystemExplorationMap() const { return exploration_map_; }
   const MapType &GetSystemExploredIDFMap() const { return explored_idf_map_; }
+  MapType &GetSystemExploredIDFMapMutable() { return explored_idf_map_; }
   //! Get the world map
   const MapType &GetWorldMap() const { return world_idf_.GetWorldMap(); }
   //! Get the world map (mutable)
@@ -536,9 +537,9 @@ class CoverageSystem {
     return robots_[id].GetRobotLocalMap();
   }
 
-  MapType &GetRobotLocalMapMutable(size_t const id) {
+  MapType &GetRobotMapMutable(size_t const id) {
     CheckRobotID(id);
-    return robots_[id].GetRobotLocalMapMutable();
+    return robots_[id].GetRobotMapMutable();
   }
 
   const MapType &GetRobotMap(size_t const id) const {

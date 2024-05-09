@@ -94,8 +94,9 @@ class DecentralizedCVT : public AbstractController {
       MapUtils::MapBounds index, offset;
       MapUtils::ComputeOffsets(params_.pResolution, pos, params_.pLocalMapSize,
                                params_.pWorldMapSize, index, offset);
-      auto robot_map = env_.GetRobotMap(iRobot);
-      auto robot_local_map = robot_map.block(index.left + offset.left,
+      MapType robot_map = env_.GetRobotMap(iRobot);
+      /* print("Robot map sum: ", robot_map.sum()); */
+      MapType robot_local_map = robot_map.block(index.left + offset.left,
                                              index.bottom + offset.bottom,
                                              offset.width, offset.height);
       Point2 map_translation(

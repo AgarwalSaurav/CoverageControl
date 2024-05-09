@@ -150,8 +150,6 @@ void pyCoverageControl_core(py::module &m) {
            py::return_value_policy::reference_internal)
       .def("GetRobotLocalMap", &RobotModel::GetRobotLocalMap,
            py::return_value_policy::reference_internal)
-      .def("GetRobotLocalMapMutable", &RobotModel::GetRobotLocalMapMutable,
-           py::return_value_policy::reference_internal)
       .def("GetRobotSystemMap", &RobotModel::GetRobotSystemMap,
            py::return_value_policy::reference_internal)
       .def("GetSensorView", &RobotModel::GetSensorView,
@@ -308,9 +306,16 @@ void pyCoverageControl_core_coverage_system(py::module &m) {
            "Get Positions of Robots", py::arg("force_no_noise") = false)
       .def("GetRobotLocalMap", &CoverageSystem::GetRobotLocalMap,
            py::return_value_policy::reference_internal)
-      .def("GetRobotLocalMapMutable", &CoverageSystem::GetRobotLocalMapMutable,
+      .def("GetRobotMap", &CoverageSystem::GetRobotMap,
+           py::return_value_policy::reference_internal)
+      .def("GetRobotMapMutable", &CoverageSystem::GetRobotMapMutable,
            py::return_value_policy::reference_internal)
       .def("GetRobotSensorView", &CoverageSystem::GetRobotSensorView,
+           py::return_value_policy::reference_internal)
+      .def("GetSystemExploredIDFMap", &CoverageSystem::GetSystemExploredIDFMap,
+           py::return_value_policy::reference_internal)
+      .def("GetSystemExploredIDFMapMutable",
+           &CoverageSystem::GetSystemExploredIDFMapMutable,
            py::return_value_policy::reference_internal)
       .def("GetCommunicationMap", &CoverageSystem::GetCommunicationMap,
            py::return_value_policy::reference_internal)
