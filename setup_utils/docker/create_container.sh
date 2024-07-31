@@ -14,8 +14,9 @@ print_usage() {
 eval set -- "$params"
 unset params
 
-IMAGE_BASE_NAME=ghcr.io/kumarrobotics/coveragecontrol
-IMAGE_TAG=latest
+# IMAGE_BASE_NAME=ghcr.io/kumarrobotics/coveragecontrol
+# IMAGE_TAG=latest
+IMAGE_BASE_NAME=agarwalsaurav/pytorch_base
 
 while true; do
 	case ${1} in
@@ -37,8 +38,9 @@ else
 	VOLUME_OPTION="-v ${WS_DIR}:${CONTAINER_CC_WS}:rw"
 fi
 
+CONTAINER_OPTIONS="--gpus all "
 if [[ ${CUDA_IMAGE} == true ]]; then
-	CONTAINER_OPTIONS+="--gpus all "
+	CONTAINER_OPTIONS="--gpus all "
 	if [[ ${ROS_IMAGE} == true ]]; then
 		IMAGE_TAG="pytorch2.2.2-cuda12.2.2-ros2humble"
 	else
@@ -51,6 +53,7 @@ else
 		IMAGE_TAG="pytorch2.2.2"
 	fi
 fi
+IMAGE_TAG=pytorch2.3.1-cuda12.2.2
 
 IMAGE_NAME="${IMAGE_BASE_NAME}:${IMAGE_TAG}"
 

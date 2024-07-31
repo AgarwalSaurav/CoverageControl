@@ -40,9 +40,9 @@ RUN apt-get -y install \
 											 libmpfr-dev \
 											 libboost-all-dev \
 											 libeigen3-dev \
-											 python3.11 \
-											 python3.11-dev \
-											 python3.11-venv \
+											 python3.12 \
+											 python3.12-dev \
+											 python3.12-venv \
 											 python-is-python3 \
 											 libgeos-dev \
 											 libyaml-cpp-dev \
@@ -59,7 +59,7 @@ RUN rm -rf /var/lib/apt/lists/*; \
 		rm -f /var/cache/apt/*.bin
 
 RUN mkdir download; \
-		wget https://download.pytorch.org/libtorch/cu121/libtorch-cxx11-abi-shared-with-deps-2.2.2%2Bcu121.zip -O download/libtorch.zip; \
+		wget https://download.pytorch.org/libtorch/cu121/libtorch-cxx11-abi-shared-with-deps-2.3.1%2Bcu121.zip -O download/libtorch.zip; \
 		unzip download/libtorch.zip -d /opt/; \
 		rm -r download
 
@@ -67,7 +67,7 @@ ENV LD_LIBRARY_PATH /usr/local/lib:/opt/libtorch/lib:${LD_LIBRARY_PATH}
 ENV Torch_DIR /opt/libtorch/share/cmake/
 
 COPY requirements.txt /opt/requirements.txt
-RUN python3.11 -m venv /opt/venv
+RUN python3.12 -m venv /opt/venv
 RUN /opt/venv/bin/pip install --no-cache-dir wheel
 RUN /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
 ENV VENV_PATH /opt/venv
