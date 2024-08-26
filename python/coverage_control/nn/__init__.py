@@ -15,6 +15,7 @@ __all__ = [
     "LocalMapCNNDataset",
     "LocalMapGNNDataset",
     "CNNGNNDataset",
+    "ObjCNNGNNDataset",
     "VoronoiGNNDataset",
     "CNN",
     "LPAC",

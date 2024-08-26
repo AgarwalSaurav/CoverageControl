@@ -7,9 +7,11 @@ from __future__ import annotations
 from .data_loader_utils import DataLoaderUtils
 from .loaders import (
     CNNGNNDataset,
+    ObjCNNGNNDataset,
 )
 
 __all__ = [
     "DataLoaderUtils",
     "CNNGNNDataset",
+    "ObjCNNGNNDataset",
 ]

@@ -138,6 +138,8 @@ def split_dataset(config_path):
         "edge_weights",
         "robot_positions",
         "coverage_features",
+        "objectives",
+        "normalized_objectives",
     ]
 
     for data_name in data_names:

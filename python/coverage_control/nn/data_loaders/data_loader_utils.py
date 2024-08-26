@@ -26,7 +26,7 @@ from coverage_control import IOUtils
 __all__ = ["DataLoaderUtils"]
 
 
-## @ingroup python_api
+# @ingroup python_api
 class DataLoaderUtils:
     """
     Class to provide utility functions to load tensors and configuration files
@@ -105,6 +105,36 @@ class DataLoaderUtils:
             normalized_coverage_features,
             coverage_features_mean,
             coverage_features_std,
+        )
+
+    @staticmethod
+    def load_objective_values(
+        path: str
+    ) -> tuple[torch.tensor, torch.tensor, torch.tensor]:
+        """
+        Function to load normalized objective values
+
+        The values are stored as tensors in the following format:
+        - {path}/normalized_objectives.pt: Normalized objectives
+        - {path}/../objectives_mean.pt: Mean of the objectives
+        - {path}/../objectives_std.pt: Standard deviation of the objectives
+
+        Args:
+            path (str): Path to the directory containing the objectives
+
+        Returns:
+            objectives: The loaded objectives
+            objectives_mean: Mean of the objectives
+            objectives_std: Standard deviation of the objectives
+        """
+        normalized_objectives = IOUtils.load_tensor(f"{path}/normalized_objectives.pt")
+        objectives_mean = IOUtils.load_tensor(f"{path}/../objectives_mean.pt")
+        objectives_std = IOUtils.load_tensor(f"{path}/../objectives_std.pt")
+
+        return (
+            normalized_objectives,
+            objectives_mean,
+            objectives_std,
         )
 
     @staticmethod

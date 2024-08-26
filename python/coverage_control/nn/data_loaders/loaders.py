@@ -140,6 +140,68 @@ class CNNGNNDataset(Dataset):
 
         return data, targets
 
+## @ingroup python_api
+class ObjCNNGNNDataset(Dataset):
+    """
+    Dataset for hybrid CNN-GNN training
+    """
+
+    def __init__(self, data_dir, stage, use_comm_map, world_size):
+        super().__init__(None, None, None, None)
+
+        self.stage = stage
+
+        self.maps = DataLoaderUtils.load_maps(f"{data_dir}/{stage}", use_comm_map)
+        self.dataset_size = self.maps.shape[0]
+
+        normalized_objectives, objectives_mean, objectives_std = (
+                DataLoaderUtils.load_objective_values(f"{data_dir}/{stage}")
+                )
+
+        self.targets, self.targets_mean, self.targets_std = (
+                DataLoaderUtils.load_actions(f"{data_dir}/{stage}")
+                )
+        # Combine objective to the target
+        objs = normalized_objectives.view(-1, 1, 1)
+        objs = objs.repeat(1, self.targets.shape[1], 1)
+        self.targets = torch.cat((self.targets, objs), dim=2)
+        self.targets_mean = torch.cat((self.targets_mean, objectives_mean.view(1)), dim=0)
+        self.targets_std = torch.cat((self.targets_std, objectives_std.view(1)), dim=0)
+        print(f"Targets: {self.targets.shape}")
+        print(f"Targets Mean: {self.targets_mean}")
+        print(f"Targets Std: {self.targets_std}")
+
+        self.edge_weights = DataLoaderUtils.load_edge_weights(f"{data_dir}/{stage}")
+
+        self.robot_positions = DataLoaderUtils.load_robot_positions(
+                f"{data_dir}/{stage}"
+                )
+        self.robot_positions = (self.robot_positions + world_size / 2) / world_size
+
+
+        # Print the details of the dataset with device information
+        print(f"Dataset: {self.stage} | Size: {self.dataset_size}",
+              f"Coverage Maps: {self.maps.shape}",
+              f"Targets: {self.targets.shape}",
+              f"Robot Positions: {self.robot_positions.shape}",
+              f"Edge Weights: {self.edge_weights.shape}",
+              )
+
+    def len(self):
+        return self.dataset_size
+
+    def get(self, idx):
+        data = DataLoaderUtils.to_torch_geometric_data(
+                self.maps[idx], self.edge_weights[idx], self.robot_positions[idx]
+                )
+        # data = CoverageEnvUtils.GetTorchGeometricDataRobotPositions(self.maps[idx], self.robot_positions[idx])
+        targets = self.targets[idx]
+
+        if targets.dim == 3:
+            targets = targets.view(-1, targets.shape[-1])
+
+        return data, targets
+
 
 ## @ingroup python_api
 class VoronoiGNNDataset(Dataset):
