@@ -167,9 +167,6 @@ class ObjCNNGNNDataset(Dataset):
         self.targets = torch.cat((self.targets, objs), dim=2)
         self.targets_mean = torch.cat((self.targets_mean, objectives_mean.view(1)), dim=0)
         self.targets_std = torch.cat((self.targets_std, objectives_std.view(1)), dim=0)
-        print(f"Targets: {self.targets.shape}")
-        print(f"Targets Mean: {self.targets_mean}")
-        print(f"Targets Std: {self.targets_std}")
 
         self.edge_weights = DataLoaderUtils.load_edge_weights(f"{data_dir}/{stage}")
 

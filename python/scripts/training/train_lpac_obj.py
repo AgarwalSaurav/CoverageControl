@@ -53,7 +53,7 @@ if "PreTrainedModel" in config["LPACModel"]:
             )
     model.load_model(lpac_pretrained_model)
 
-train_dataset = ObjCNNGNNDataset(data_dir, "val", use_comm_map, world_size)
+train_dataset = ObjCNNGNNDataset(data_dir, "train", use_comm_map, world_size)
 val_dataset = ObjCNNGNNDataset(data_dir, "val", use_comm_map, world_size)
 
 # Check if buffer exists
