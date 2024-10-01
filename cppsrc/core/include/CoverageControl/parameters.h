@@ -77,10 +77,9 @@ class Parameters {
 
   //! Actual size of maps is size * pResolution, e.g.,  pWorldMapSize *
   //! pResolution
-  int pWorldMapSize = 1024;
-
-  //! Robot map saves what the robot has seen
-  int pRobotMapSize = pWorldMapSize;
+  // int pWorldMapSize = 1024;
+  int pWorldMapSizeX = 1024;
+  int pWorldMapSizeY = 1024;
 
   //! Local map is used for computing mass.
   //! Actual area would be pLocalMapSize * pResolution

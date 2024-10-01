@@ -57,8 +57,9 @@ inline void GetClosestGridCoordinate(double const resolution, Point2 const &pt,
 //! Compute necessary map transformations when the point is close to the
 //! boundary
 inline void ComputeOffsets(double const resolution, Point2 const &pos,
-                           int const submap_size, int const map_size,
-                           MapBounds &index, MapBounds &offset) {
+                           int const submap_size, int const map_size_x,
+                           int const map_size_y, MapBounds &index,
+                           MapBounds &offset) {
   int pos_idx = 0, pos_idy = 0;
   GetClosestGridCoordinate(resolution, pos, pos_idx, pos_idy);
   index.left = pos_idx - submap_size / 2;
@@ -74,11 +75,11 @@ inline void ComputeOffsets(double const resolution, Point2 const &pos,
     offset.bottom = -index.bottom;
   }
 
-  if (index.right > map_size) {
-    offset.right = map_size - index.right;
+  if (index.right > map_size_x) {
+    offset.right = map_size_x - index.right;
   }
-  if (index.top > map_size) {
-    offset.top = map_size - index.top;
+  if (index.top > map_size_y) {
+    offset.top = map_size_y - index.top;
   }
 
   offset.width = index.right + offset.right - (index.left + offset.left);
@@ -87,10 +88,11 @@ inline void ComputeOffsets(double const resolution, Point2 const &pos,
 
 template <typename T = MapType>
 inline void GetSubMap(double const resolution, Point2 const &pos,
-                      int const map_size, T const &map, int const submap_size,
+                      int const map_size_x, int const map_size_y,
+                      T const &map, int const submap_size,
                       T &submap) {
   MapBounds index, offset;
-  ComputeOffsets(resolution, pos, submap_size, map_size, index, offset);
+  ComputeOffsets(resolution, pos, submap_size, map_size_x, map_size_y, index, offset);
   submap.block(offset.left, offset.bottom, offset.width, offset.height) =
       map.block(index.left + offset.left, index.bottom + offset.bottom,
                 offset.width, offset.height);
@@ -98,9 +100,10 @@ inline void GetSubMap(double const resolution, Point2 const &pos,
 
 template <typename T = MapType>
 inline auto GetSubMap(double const resolution, Point2 const &pos,
-                      int const map_size, T const &map, int const submap_size) {
+                      int const map_size_x, int const map_size_y,
+                      T const &map, int const submap_size) {
   MapBounds index, offset;
-  ComputeOffsets(resolution, pos, submap_size, map_size, index, offset);
+  ComputeOffsets(resolution, pos, submap_size, map_size_x, map_size_y, index, offset);
   return map.block(index.left + offset.left, index.bottom + offset.bottom,
                    offset.width, offset.height);
 }

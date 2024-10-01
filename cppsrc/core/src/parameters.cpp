@@ -96,19 +96,18 @@ void Parameters::ParseParameters() {
 
   if (toml_EnvironmentMaps) {
     auto toml_Resolution = toml_EnvironmentMaps["Resolution"].value<double>();
-    auto toml_WorldMapSize = toml_EnvironmentMaps["WorldMapSize"].value<int>();
-    auto toml_RobotMapSize = toml_EnvironmentMaps["RobotMapSize"].value<int>();
-    auto toml_LocalMapSize = toml_EnvironmentMaps["LocalMapSize"].value<int>();
+    auto toml_WorldMapSizeX = toml_EnvironmentMaps["WorldMapSizeX"].value<int>();
+    auto toml_WorldMapSizeY = toml_EnvironmentMaps["LocalMapSizeY"].value<int>();
 
     if (toml_Resolution) {
       pResolution = toml_Resolution.value();
     }
 
-    if (toml_WorldMapSize) {
-      pWorldMapSize = toml_WorldMapSize.value();
+    if (toml_WorldMapSizeX) {
+      pWorldMapSizeX = toml_WorldMapSizeX.value();
     }
-    if (toml_RobotMapSize) {
-      pRobotMapSize = toml_RobotMapSize.value();
+    if (toml_WorldMapSizeY) {
+      pWorldMapSizeY = toml_WorldMapSizeY.value();
     }
     if (toml_LocalMapSize) {
       pLocalMapSize = toml_LocalMapSize.value();
@@ -271,7 +270,6 @@ void Parameters::PrintParameters() const {
 
   std::cout << "Resolution: " << pResolution << std::endl;
   std::cout << "WorldMapSize: " << pWorldMapSize << std::endl;
-  std::cout << "RobotMapSize: " << pRobotMapSize << std::endl;
   std::cout << "LocalMapSize: " << pLocalMapSize << std::endl;
 
   std::cout << "UpdateRobotMap: " << pUpdateRobotMap << std::endl;
